@@ -8,17 +8,23 @@
 "use strict";
 
 /* ════════════════════════════════════════════════════════════
-      1.  GLOBAL STATE
-      ════════════════════════════════════════════════════════════ */
+         1.  GLOBAL STATE
+         ════════════════════════════════════════════════════════════ */
 
 /** Currently selected biological sex ('male' | 'female' | 'other') */
 let selectedGender = "male";
 
+/** Stores the last successful prediction result — used by the email modal */
+let lastPredictionData = null;
+
+/** Stores the last CBC param values — used by the email modal */
+let lastParamData = null;
+
 /* ════════════════════════════════════════════════════════════
-      2.  PARAMETER CONFIGURATION
-          Drives input validation, slider behaviour and
-          normal-range evaluation for each CBC field.
-      ════════════════════════════════════════════════════════════ */
+         2.  PARAMETER CONFIGURATION
+             Drives input validation, slider behaviour and
+             normal-range evaluation for each CBC field.
+         ════════════════════════════════════════════════════════════ */
 const PARAMS = {
   hgb: {
     inputId: "hemoglobin",
@@ -71,8 +77,8 @@ const PARAMS = {
 };
 
 /* ════════════════════════════════════════════════════════════
-      3.  GENDER SELECTOR
-      ════════════════════════════════════════════════════════════ */
+         3.  GENDER SELECTOR
+         ════════════════════════════════════════════════════════════ */
 
 /**
  * Marks the clicked gender toggle as active and updates state.
@@ -88,8 +94,8 @@ function selectGender(btn) {
 }
 
 /* ════════════════════════════════════════════════════════════
-      4.  SLIDER ↔ INPUT SYNC
-      ════════════════════════════════════════════════════════════ */
+         4.  SLIDER ↔ INPUT SYNC
+         ════════════════════════════════════════════════════════════ */
 
 /**
  * Called when a number input changes.
@@ -127,8 +133,8 @@ function syncInput(inputId, value) {
 }
 
 /* ════════════════════════════════════════════════════════════
-      5.  REAL-TIME PARAMETER EVALUATION
-      ════════════════════════════════════════════════════════════ */
+         5.  REAL-TIME PARAMETER EVALUATION
+         ════════════════════════════════════════════════════════════ */
 
 /**
  * Shows a coloured status line below each parameter field
@@ -167,8 +173,8 @@ function getStatusTag(key, value) {
 }
 
 /* ════════════════════════════════════════════════════════════
-      6.  FORM RESET
-      ════════════════════════════════════════════════════════════ */
+         6.  FORM RESET
+         ════════════════════════════════════════════════════════════ */
 
 function resetForm() {
   ["hemoglobin", "mcv", "mch", "mchc"].forEach((id) => {
@@ -189,14 +195,16 @@ function resetForm() {
   if (badge) badge.remove();
 
   selectedGender = "male";
+  lastPredictionData = null;
+  lastParamData = null;
   document.querySelectorAll(".toggle-btn").forEach((btn, i) => {
     btn.classList.toggle("active", i === 0);
   });
 }
 
 /* ════════════════════════════════════════════════════════════
-      7.  INPUT VALIDATION
-      ════════════════════════════════════════════════════════════ */
+         7.  INPUT VALIDATION
+         ════════════════════════════════════════════════════════════ */
 
 function validateInputs() {
   const fields = [
@@ -226,8 +234,8 @@ function validateInputs() {
 }
 
 /* ════════════════════════════════════════════════════════════
-      8.  TOAST NOTIFICATIONS
-      ════════════════════════════════════════════════════════════ */
+         8.  TOAST NOTIFICATIONS
+         ════════════════════════════════════════════════════════════ */
 
 function showToast(message) {
   const existing = document.querySelector(".toast");
@@ -266,8 +274,8 @@ function showToast(message) {
 }
 
 /* ════════════════════════════════════════════════════════════
-      9.  LOADING OVERLAY STEPS
-      ════════════════════════════════════════════════════════════ */
+         9.  LOADING OVERLAY STEPS
+         ════════════════════════════════════════════════════════════ */
 
 function animateLoadingSteps() {
   const stepIds = ["step1", "step2", "step3"];
@@ -300,13 +308,13 @@ function resetLoadingSteps() {
 }
 
 /* ════════════════════════════════════════════════════════════
-      10. PREDICTION  (RandomForestClassifier via Flask /predict)
-   
-      Model  : model5.pkl — RandomForestClassifier (100 trees)
-      Input  : ['Gender','Hemoglobin','MCH','MCHC','MCV']
-      Gender : 0=Female | 1=Male/Other  (encoded by app.py)
-      Output : 0=No Anemia | 1=Anemia  + predict_proba confidence
-      ════════════════════════════════════════════════════════════ */
+         10. PREDICTION  (RandomForestClassifier via Flask /predict)
+      
+         Model  : model5.pkl — RandomForestClassifier (100 trees)
+         Input  : ['Gender','Hemoglobin','MCH','MCHC','MCV']
+         Gender : 0=Female | 1=Male/Other  (encoded by app.py)
+         Output : 0=No Anemia | 1=Anemia  + predict_proba confidence
+         ════════════════════════════════════════════════════════════ */
 
 async function runPrediction() {
   if (!validateInputs()) return;
@@ -342,6 +350,10 @@ async function runPrediction() {
       return;
     }
 
+    // Save for email modal use
+    lastPredictionData = data;
+    lastParamData = { hemoglobin, mcv, mch, mchc };
+
     displayResults(data, { hemoglobin, mcv, mch, mchc });
   } catch (_err) {
     showToast("Cannot reach the server. Make sure app.py is running.");
@@ -349,8 +361,8 @@ async function runPrediction() {
 }
 
 /* ════════════════════════════════════════════════════════════
-      11. RESULTS RENDERING
-      ════════════════════════════════════════════════════════════ */
+         11. RESULTS RENDERING
+         ════════════════════════════════════════════════════════════ */
 
 function displayResults(data, params) {
   const isAnemia = data.is_anemia;
@@ -425,26 +437,26 @@ function displayResults(data, params) {
       const tag = getStatusTag(p.key, p.val);
       const cardCls = tag.cls !== "normal" ? "abnormal" : "normal-item";
       return `
-         <div class="summary-item ${cardCls}">
-           <div class="sum-param">${p.label}</div>
-           <div class="sum-value" style="color:${valueColor(tag.cls)}">${
+            <div class="summary-item ${cardCls}">
+              <div class="sum-param">${p.label}</div>
+              <div class="sum-value" style="color:${valueColor(tag.cls)}">${
         p.val
       }</div>
-           <div class="sum-unit">${p.unit}</div>
-           <span class="sum-tag ${tag.cls}">${tag.label}</span>
-         </div>`;
+              <div class="sum-unit">${p.unit}</div>
+              <span class="sum-tag ${tag.cls}">${tag.label}</span>
+            </div>`;
     })
     .join("");
 
   const genderLabel =
     selectedGender.charAt(0).toUpperCase() + selectedGender.slice(1);
   const genderCard = `
-       <div class="summary-item gender-item">
-         <div class="sum-param">Sex</div>
-         <div class="sum-value" style="color:#c07ef0;font-size:1.4rem;padding:.25rem 0">${genderLabel}</div>
-         <div class="sum-unit">biological sex</div>
-         <span class="sum-tag gender">Input</span>
-       </div>`;
+          <div class="summary-item gender-item">
+            <div class="sum-param">Sex</div>
+            <div class="sum-value" style="color:#c07ef0;font-size:1.4rem;padding:.25rem 0">${genderLabel}</div>
+            <div class="sum-unit">biological sex</div>
+            <span class="sum-tag gender">Input</span>
+          </div>`;
 
   grid.innerHTML = paramCards + genderCard;
 
@@ -456,8 +468,8 @@ function displayResults(data, params) {
 }
 
 /* ════════════════════════════════════════════════════════════
-      12. NAVIGATION
-      ════════════════════════════════════════════════════════════ */
+         12. NAVIGATION
+         ════════════════════════════════════════════════════════════ */
 
 function newPrediction() {
   document.getElementById("results").style.display = "none";
@@ -465,8 +477,8 @@ function newPrediction() {
 }
 
 /* ════════════════════════════════════════════════════════════
-      13. EXPORT REPORT
-      ════════════════════════════════════════════════════════════ */
+         13. EXPORT REPORT
+         ════════════════════════════════════════════════════════════ */
 
 function printReport() {
   const titleEl = document.getElementById("verdictTitle");
@@ -498,49 +510,49 @@ function printReport() {
   const verdictCls = titleEl.classList.contains("anemia") ? "anemia" : "normal";
 
   const html = `<!DOCTYPE html>
-   <html lang="en">
-   <head>
-     <meta charset="UTF-8"/>
-     <title>HemoScan AI — Prediction Report</title>
-     <style>
-       body{font-family:"Segoe UI",sans-serif;padding:40px;color:#111;max-width:700px;margin:0 auto}
-       h1{color:#e8472a;font-size:1.7rem;margin-bottom:.2rem}
-       .sub{color:#666;font-size:.9rem;margin-bottom:2rem}
-       table{width:100%;border-collapse:collapse;margin:1.5rem 0}
-       th,td{padding:.65rem 1rem;border:1px solid #ddd;text-align:left;font-size:.9rem}
-       th{background:#f8f8f8;font-weight:600}
-       .verdict{padding:1rem 1.25rem;border-radius:8px;margin:1.5rem 0}
-       .verdict.anemia{background:#fff2f0;border-left:4px solid #e8472a}
-       .verdict.normal{background:#f0fff6;border-left:4px solid #2adb7a}
-       .model-tag{display:inline-block;font-family:monospace;font-size:.75rem;
-                  background:#f4f4f4;border:1px solid #ddd;padding:.2rem .5rem;
-                  border-radius:4px;margin-top:.6rem;color:#555}
-       .note{font-size:.78rem;color:#888;margin-top:2rem;border-top:1px solid #eee;padding-top:1rem}
-     </style>
-   </head>
-   <body>
-     <h1>HemoScan AI</h1>
-     <div class="sub">Anemia Prediction Report</div>
-     <table>
-       <tr><th>Parameter</th><th>Value</th><th>Status</th></tr>
-       ${tableRows}
-     </table>
-     <div class="verdict ${verdictCls}">
-       <strong>${titleEl.textContent}</strong> &mdash; Confidence: ${
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8"/>
+        <title>HemoScan AI — Prediction Report</title>
+        <style>
+          body{font-family:"Segoe UI",sans-serif;padding:40px;color:#111;max-width:700px;margin:0 auto}
+          h1{color:#e8472a;font-size:1.7rem;margin-bottom:.2rem}
+          .sub{color:#666;font-size:.9rem;margin-bottom:2rem}
+          table{width:100%;border-collapse:collapse;margin:1.5rem 0}
+          th,td{padding:.65rem 1rem;border:1px solid #ddd;text-align:left;font-size:.9rem}
+          th{background:#f8f8f8;font-weight:600}
+          .verdict{padding:1rem 1.25rem;border-radius:8px;margin:1.5rem 0}
+          .verdict.anemia{background:#fff2f0;border-left:4px solid #e8472a}
+          .verdict.normal{background:#f0fff6;border-left:4px solid #2adb7a}
+          .model-tag{display:inline-block;font-family:monospace;font-size:.75rem;
+                     background:#f4f4f4;border:1px solid #ddd;padding:.2rem .5rem;
+                     border-radius:4px;margin-top:.6rem;color:#555}
+          .note{font-size:.78rem;color:#888;margin-top:2rem;border-top:1px solid #eee;padding-top:1rem}
+        </style>
+      </head>
+      <body>
+        <h1>HemoScan AI</h1>
+        <div class="sub">Anemia Prediction Report</div>
+        <table>
+          <tr><th>Parameter</th><th>Value</th><th>Status</th></tr>
+          ${tableRows}
+        </table>
+        <div class="verdict ${verdictCls}">
+          <strong>${titleEl.textContent}</strong> &mdash; Confidence: ${
     confEl.textContent
   }<br/>
-       <span style="font-size:.9rem;color:#555">${
-         subtitleEl.textContent
-       }</span><br/>
-       <span class="model-tag">🌲 ${modelUsed}</span>
-     </div>
-     <p class="note">
-       Generated by ${modelUsed} for clinical decision support only.<br/>
-       Not a substitute for professional medical advice.<br/>
-       Generated: ${new Date().toLocaleString()}
-     </p>
-   </body>
-   </html>`;
+          <span style="font-size:.9rem;color:#555">${
+            subtitleEl.textContent
+          }</span><br/>
+          <span class="model-tag">🌲 ${modelUsed}</span>
+        </div>
+        <p class="note">
+          Generated by ${modelUsed} for clinical decision support only.<br/>
+          Not a substitute for professional medical advice.<br/>
+          Generated: ${new Date().toLocaleString()}
+        </p>
+      </body>
+      </html>`;
 
   const win = window.open("", "_blank");
   win.document.write(html);
@@ -549,8 +561,8 @@ function printReport() {
 }
 
 /* ════════════════════════════════════════════════════════════
-      14. GEMINI FILE UPLOAD & AUTO-EXTRACTION
-      ════════════════════════════════════════════════════════════ */
+         14. GEMINI FILE UPLOAD & AUTO-EXTRACTION
+         ════════════════════════════════════════════════════════════ */
 
 let selectedFile = null;
 
@@ -636,10 +648,122 @@ async function extractValues() {
     btn.disabled = false;
   }
 }
+/* ════════════════════════════════════════════════════════════
+         14. EMAIL MODAL  (Resend via Flask /send-report)
+         ════════════════════════════════════════════════════════════ */
+
+/**
+ * Opens the email modal and pre-fills the preview strip
+ * with the latest prediction result.
+ */
+function openEmailModal() {
+  if (!lastPredictionData) {
+    showToast("Run a prediction first before sending a report.");
+    return;
+  }
+
+  // Populate preview strip
+  const prevVerdict = document.getElementById("previewVerdict");
+  const prevConf = document.getElementById("previewConfidence");
+  prevVerdict.textContent = lastPredictionData.prediction;
+  prevVerdict.className =
+    "preview-verdict " + (lastPredictionData.is_anemia ? "anemia" : "normal");
+  prevConf.textContent = `${lastPredictionData.confidence}% confidence`;
+
+  // Reset input + status
+  document.getElementById("emailInput").value = "";
+  document.getElementById("modalStatus").textContent = "";
+  document.getElementById("modalStatus").className = "modal-status";
+  document.getElementById("btnSendEmail").disabled = false;
+  document.getElementById("btnSendLabel").textContent = "Send Report";
+
+  document.getElementById("emailModal").classList.add("active");
+  setTimeout(() => document.getElementById("emailInput").focus(), 150);
+}
+
+/** Closes the modal. */
+function closeEmailModal() {
+  document.getElementById("emailModal").classList.remove("active");
+}
+
+/** Closes only when clicking the backdrop (not the modal card itself). */
+function handleModalBackdrop(event) {
+  if (event.target === document.getElementById("emailModal")) closeEmailModal();
+}
+
+/** Escape key closes the modal. */
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeEmailModal();
+});
+
+/**
+ * Sends the full prediction report to the entered email address
+ * by POSTing to Flask /send-report, which uses the Resend API.
+ */
+async function sendReportEmail() {
+  const emailInput = document.getElementById("emailInput");
+  const status = document.getElementById("modalStatus");
+  const btn = document.getElementById("btnSendEmail");
+  const btnLabel = document.getElementById("btnSendLabel");
+  const email = emailInput.value.trim();
+
+  // Client-side email format check
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    status.textContent = "✗  Please enter a valid email address.";
+    status.className = "modal-status error";
+    emailInput.focus();
+    return;
+  }
+
+  // Loading state
+  btn.disabled = true;
+  btnLabel.textContent = "Sending...";
+  status.textContent = "⏳  Sending report via Resend...";
+  status.className = "modal-status loading";
+
+  try {
+    const response = await fetch("/send-report", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        to_email: email,
+        prediction: lastPredictionData.prediction,
+        is_anemia: lastPredictionData.is_anemia,
+        confidence: lastPredictionData.confidence,
+        message: lastPredictionData.message,
+        model_used: lastPredictionData.model_used || "RandomForestClassifier",
+        params: {
+          gender: selectedGender,
+          hemoglobin: lastParamData.hemoglobin,
+          mcv: lastParamData.mcv,
+          mch: lastParamData.mch,
+          mchc: lastParamData.mchc,
+        },
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok || data.error) throw new Error(data.error);
+
+    // Success
+    status.textContent = `✓  Report sent to ${email}`;
+    status.className = "modal-status success";
+    btnLabel.textContent = "Sent ✓";
+
+    // Auto-close after 2.5s
+    setTimeout(() => closeEmailModal(), 2500);
+  } catch (err) {
+    status.textContent = `✗  ${err.message}`;
+    status.className = "modal-status error";
+    btn.disabled = false;
+    btnLabel.textContent = "Send Report";
+  }
+}
 
 /* ════════════════════════════════════════════════════════════
-      15. INITIALISATION
-      ════════════════════════════════════════════════════════════ */
+         15. INITIALISATION
+         ════════════════════════════════════════════════════════════ */
 
 (function initSliderFills() {
   Object.keys(PARAMS).forEach((key) => {

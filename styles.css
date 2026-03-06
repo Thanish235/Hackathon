@@ -997,7 +997,7 @@ body {
   color: #c07ef0;
 }
 
-/* ── Clinical disclaimer ── */
+/* ── Clinical disclaimer ── 
 .clinical-note {
   display: flex;
   gap: 0.95rem;
@@ -1023,7 +1023,7 @@ body {
 .note-text strong {
   color: var(--text);
   font-weight: 600;
-}
+}*/
 
 /* Export button */
 .report-actions {
@@ -1362,4 +1362,247 @@ body {
 }
 .extract-status.error {
   color: var(--blood);
+}
+/* ════════════════════════════════════════════════════════════
+      11. EMAIL MODAL
+      ════════════════════════════════════════════════════════════ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(13, 14, 16, 0.88);
+  backdrop-filter: blur(12px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal {
+  background: var(--bg-2);
+  border: 1px solid var(--border-2);
+  border-radius: 18px;
+  width: 100%;
+  max-width: 500px;
+  overflow: hidden;
+  animation: modalIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Modal header */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4rem 1.8rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.01);
+}
+.modal-header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.modal-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(232, 71, 42, 0.12);
+  border: 1px solid rgba(232, 71, 42, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--text);
+  font-weight: 400;
+  margin: 0;
+}
+
+.modal-close {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.45rem;
+  color: var(--text-3);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+}
+.modal-close:hover {
+  color: var(--text);
+  border-color: var(--border-2);
+  background: var(--surface-hover);
+}
+
+/* Modal body */
+.modal-body {
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+/* Preview strip */
+.modal-preview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.2rem;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.preview-verdict {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+}
+.preview-verdict.anemia {
+  color: var(--blood);
+}
+.preview-verdict.normal {
+  color: var(--green);
+}
+.preview-confidence {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-3);
+  letter-spacing: 0.04em;
+}
+
+/* Email field */
+.modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.modal-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-3);
+}
+.modal-input-wrap {
+  position: relative;
+}
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-3);
+  pointer-events: none;
+}
+.modal-input {
+  width: 100%;
+  background: var(--bg-4);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 0.9rem 1rem 0.9rem 2.8rem;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.2s;
+}
+.modal-input:hover {
+  border-color: var(--border-2);
+}
+.modal-input:focus {
+  border-color: var(--blood);
+  box-shadow: 0 0 0 3px var(--blood-glow);
+}
+.modal-input::placeholder {
+  color: var(--text-3);
+}
+
+/* Status */
+.modal-status {
+  min-height: 1.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+  transition: all 0.3s;
+  text-align: center;
+}
+.modal-status.loading {
+  color: var(--text-3);
+}
+.modal-status.success {
+  color: var(--green);
+}
+.modal-status.error {
+  color: var(--blood);
+}
+
+/* Modal footer */
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 1.2rem 1.8rem;
+  border-top: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.01);
+}
+.btn-modal-cancel {
+  background: transparent;
+  border: 1px solid var(--border-2);
+  border-radius: 8px;
+  padding: 0.75rem 1.4rem;
+  color: var(--text-2);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-modal-cancel:hover {
+  color: var(--text);
+  background: var(--surface-hover);
+}
+.btn-modal-send {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--blood);
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-modal-send:hover:not(:disabled) {
+  background: var(--blood-dim);
+  box-shadow: 0 4px 18px rgba(232, 71, 42, 0.4);
+  transform: translateY(-1px);
+}
+.btn-modal-send:active {
+  transform: translateY(0);
+}
+.btn-modal-send:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
 }
