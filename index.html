@@ -4,24 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HemoScan AI — Anemia Prediction System</title>
+
+    <!-- ── Google Fonts ───────────────────────────────────────────── -->
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
+
   <body>
-    <div class="bg-mesh">
+    <!-- ════════════════════════════════════════════════════════════
+         BACKGROUND — Animated mesh gradient orbs + noise overlay
+         Decorative only; aria-hidden so screen readers skip it.
+    ════════════════════════════════════════════════════════════════ -->
+    <div class="bg-mesh" aria-hidden="true">
       <div class="mesh-orb orb-1"></div>
       <div class="mesh-orb orb-2"></div>
       <div class="mesh-orb orb-3"></div>
     </div>
-    <div class="noise-overlay"></div>
+    <div class="noise-overlay" aria-hidden="true"></div>
 
+    <!-- ════════════════════════════════════════════════════════════
+         NAVIGATION BAR — Brand logo + name
+    ════════════════════════════════════════════════════════════════ -->
     <nav class="navbar">
       <div class="nav-brand">
+        <!-- Blood-cell SVG icon -->
         <div class="brand-icon">
-          <svg width="30" height="30" viewBox="0 0 28 28" fill="none">
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 28 28"
+            fill="none"
+            aria-hidden="true"
+          >
             <circle
               cx="14"
               cy="14"
@@ -45,26 +62,22 @@
       </div>
     </nav>
 
+    <!-- ════════════════════════════════════════════════════════════
+         HERO SECTION — Headline, subtitle, animated blood-cell visual
+    ════════════════════════════════════════════════════════════════ -->
     <section class="hero">
       <div class="hero-content">
-        <div class="hero-badge">
-          
-          CBC-Based Anemia Detection
-        </div>
-        <h1 class="hero-title">
-          <em>Predict's Anemia</em><br />
-          
-        </h1>
+        <div class="hero-badge">CBC-Based Anemia Detection</div>
+        <h1 class="hero-title"><em>Predicts Anemia</em><br /></h1>
         <p class="hero-subtitle">
           AI-powered analysis of Complete Blood Count parameters — hemoglobin,
           MCV, MCH, and MCHC — for early-stage anemia detection and clinical
           decision support.
         </p>
-        </div>
       </div>
 
-      <!-- Animated blood-cell visual -->
-      <div class="hero-visual">
+      <!-- Animated blood-cell ring visual (decorative) -->
+      <div class="hero-visual" aria-hidden="true">
         <div class="blood-cell-animation">
           <div class="cell cell-1"></div>
           <div class="cell cell-2"></div>
@@ -76,7 +89,7 @@
             <svg width="52" height="52" viewBox="0 0 48 48" fill="none">
               <path
                 d="M24 4 C24 4 8 16 8 28 C8 36.8 15.2 44 24 44
-                     C32.8 44 40 36.8 40 28 C40 16 24 4 24 4Z"
+                       C32.8 44 40 36.8 40 28 C40 16 24 4 24 4Z"
                 fill="#e8472a"
                 opacity="0.15"
                 stroke="#e8472a"
@@ -84,13 +97,13 @@
               />
               <path
                 d="M24 12 C24 12 14 20 14 28 C14 33.5 18.5 38 24 38
-                     C29.5 38 34 33.5 34 28 C34 20 24 12 24 12Z"
+                       C29.5 38 34 33.5 34 28 C34 20 24 12 24 12Z"
                 fill="#e8472a"
                 opacity="0.4"
               />
               <path
                 d="M24 20 C24 20 19 24 19 28 C19 30.8 21.2 33 24 33
-                     C26.8 33 29 30.8 29 28 C29 24 24 20 24 20Z"
+                       C26.8 33 29 30.8 29 28 C29 24 24 20 24 20Z"
                 fill="#e8472a"
               />
             </svg>
@@ -99,13 +112,15 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════════
-       CBC PARAMETERS FORM
-  ══════════════════════════════════════════ -->
+    <!-- ════════════════════════════════════════════════════════════
+         SECTION 01 — CBC PARAMETERS FORM
+         Manual entry of hemoglobin, MCV, MCH, MCHC values with
+         sliders and real-time normal-range status indicators.
+    ════════════════════════════════════════════════════════════════ -->
     <section class="form-section" id="predict">
       <div class="form-container">
+        <!-- ── Panel 01: CBC parameter inputs ──────────────────── -->
         <div class="panel cbc-panel">
-          <!-- Panel header -->
           <div class="panel-header">
             <span class="panel-number">01</span>
             <h2 class="panel-title">CBC Parameters</h2>
@@ -114,7 +129,7 @@
 
           <div class="panel-body">
             <div class="cbc-grid">
-              <!-- ── Hemoglobin ───────────────────────── -->
+              <!-- Hemoglobin -->
               <div class="param-card">
                 <div class="param-header">
                   <div class="param-icon hgb-icon">Hgb</div>
@@ -152,7 +167,7 @@
                 <div class="param-status" id="status-hgb"></div>
               </div>
 
-              <!-- ── MCV ─────────────────────────────── -->
+              <!-- MCV -->
               <div class="param-card">
                 <div class="param-header">
                   <div class="param-icon mcv-icon">MCV</div>
@@ -190,7 +205,7 @@
                 <div class="param-status" id="status-mcv"></div>
               </div>
 
-              <!-- ── MCH ─────────────────────────────── -->
+              <!-- MCH -->
               <div class="param-card">
                 <div class="param-header">
                   <div class="param-icon mch-icon">MCH</div>
@@ -228,7 +243,7 @@
                 <div class="param-status" id="status-mch"></div>
               </div>
 
-              <!-- ── MCHC ────────────────────────────── -->
+              <!-- MCHC -->
               <div class="param-card">
                 <div class="param-header">
                   <div class="param-icon mchc-icon">MCHC</div>
@@ -268,7 +283,7 @@
                 <div class="param-status" id="status-mchc"></div>
               </div>
 
-              <!-- ── Biological Sex (full width) ─────── -->
+              <!-- Biological Sex toggle (full-width card) -->
               <div class="param-card gender-card">
                 <div class="param-header">
                   <div class="param-icon gender-icon">Sex</div>
@@ -298,55 +313,110 @@
           </div>
           <!-- /.panel-body -->
         </div>
-        <!-- /.panel -->
-<!-- ══════════════════════════════════════════
-     AI UPLOAD PANEL
-══════════════════════════════════════════ -->
-<div class="panel upload-panel">
-  <div class="panel-header">
-    <span class="panel-number">AI</span>
-    <h2 class="panel-title">Auto-Extract from Report</h2>
-    <span class="panel-badge">PDF or image</span>
-  </div>
-  <div class="panel-body">
-    <div class="upload-zone" id="uploadZone"
-         onclick="document.getElementById('fileInput').click()"
-         ondragover="handleDragOver(event)"
-         ondrop="handleDrop(event)">
-      <div class="upload-icon">
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
-          <path d="M12 15V3M12 3L8 7M12 3L16 7" stroke="#e8472a"
-                stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M3 15V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V15"
-                stroke="#e8472a" stroke-width="1.6" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div class="upload-text">
-        Drop your CBC report here, or <span class="upload-link">browse</span>
-      </div>
-      <div class="upload-sub">Supports PDF, JPG, PNG — max 10 MB</div>
-      <div class="upload-filename" id="uploadFilename"></div>
-    </div>
-    <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png"
-           style="display:none" onchange="handleFileSelect(this)"/>
-    <button class="btn-extract" id="btnExtract"
-            onclick="extractValues()" disabled>
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-        <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.7"/>
-        <path d="M21 21L16.65 16.65" stroke="currentColor"
-              stroke-width="1.7" stroke-linecap="round"/>
-        <path d="M11 8V14M8 11H14" stroke="currentColor"
-              stroke-width="1.7" stroke-linecap="round"/>
-      </svg>
-      Extract CBC Values with AI
-    </button>
-    <div class="extract-status" id="extractStatus"></div>
-  </div>
-</div>
-        <!-- Action buttons -->
+        <!-- /.cbc-panel -->
+
+        <!-- ── Panel AI: Auto-extract CBC values from uploaded report ── -->
+        <div class="panel upload-panel">
+          <div class="panel-header">
+            <span class="panel-number">AI</span>
+            <h2 class="panel-title">Auto-Extract from Report</h2>
+            <span class="panel-badge">PDF or image</span>
+          </div>
+          <div class="panel-body">
+            <!-- Drag-and-drop / click-to-browse upload zone -->
+            <div
+              class="upload-zone"
+              id="uploadZone"
+              onclick="document.getElementById('fileInput').click()"
+              ondragover="handleDragOver(event)"
+              ondrop="handleDrop(event)"
+              role="button"
+              tabindex="0"
+              aria-label="Upload CBC report file"
+            >
+              <div class="upload-icon" aria-hidden="true">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 15V3M12 3L8 7M12 3L16 7"
+                    stroke="#e8472a"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M3 15V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V15"
+                    stroke="#e8472a"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </div>
+              <div class="upload-text">
+                Drop your CBC report here, or
+                <span class="upload-link">browse</span>
+              </div>
+              <div class="upload-sub">Supports PDF, JPG, PNG — max 10 MB</div>
+              <div class="upload-filename" id="uploadFilename"></div>
+            </div>
+
+            <input
+              type="file"
+              id="fileInput"
+              accept=".pdf,.jpg,.jpeg,.png"
+              style="display: none"
+              onchange="handleFileSelect(this)"
+            />
+
+            <button
+              class="btn-extract"
+              id="btnExtract"
+              onclick="extractValues()"
+              disabled
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="11"
+                  cy="11"
+                  r="8"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                />
+                <path
+                  d="M21 21L16.65 16.65"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M11 8V14M8 11H14"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                />
+              </svg>
+              Extract CBC Values with AI
+            </button>
+            <div class="extract-status" id="extractStatus" role="status"></div>
+          </div>
+        </div>
+        <!-- /.upload-panel -->
+
+        <!-- ── Form action buttons ──────────────────────────────── -->
         <div class="action-bar">
           <button class="btn-reset" onclick="resetForm()">
-            <svg width="17" height="17" viewBox="0 0 16 16" fill="none">
+            <svg
+              width="17"
+              height="17"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+            >
               <path
                 d="M2 8 A6 6 0 1 1 8 14"
                 stroke="currentColor"
@@ -365,7 +435,13 @@
           </button>
           <button class="btn-predict" onclick="runPrediction()">
             <span>Analyze Parameters</span>
-            <svg width="20" height="20" viewBox="0 0 18 18" fill="none">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 18 18"
+              fill="none"
+              aria-hidden="true"
+            >
               <path
                 d="M3 9 L15 9 M10 4 L15 9 L10 14"
                 stroke="currentColor"
@@ -379,10 +455,16 @@
       </div>
       <!-- /.form-container -->
     </section>
+    <!-- /#predict -->
 
+    <!-- ════════════════════════════════════════════════════════════
+         SECTION 02 — PREDICTION RESULTS
+         Hidden by default. Shown by displayResults() after a
+         successful /predict response.
+    ════════════════════════════════════════════════════════════════ -->
     <section class="results-section" id="results" style="display: none">
       <div class="results-container">
-        <!-- Results header -->
+        <!-- Results header row -->
         <div class="results-header">
           <span class="panel-number">02</span>
           <h2 class="panel-title">Prediction Results</h2>
@@ -392,7 +474,7 @@
         </div>
 
         <div class="results-body">
-          <!-- Verdict card -->
+          <!-- ── Verdict card: prediction + confidence ──────────── -->
           <div class="verdict-card" id="verdictCard">
             <div class="verdict-icon-wrap" id="verdictIconWrap">
               <span id="verdictIcon"></span>
@@ -401,6 +483,7 @@
               <div class="verdict-label">Prediction Result</div>
               <div class="verdict-title" id="verdictTitle"></div>
               <div class="verdict-subtitle" id="verdictSubtitle"></div>
+              <!-- Model badge injected here by JS -->
             </div>
             <div class="verdict-confidence">
               <div class="conf-label">Confidence</div>
@@ -411,15 +494,145 @@
             </div>
           </div>
 
-          <!-- Parameter summary -->
+          <!-- ── Parameter summary cards (Hgb, MCV, MCH, MCHC, Sex) ── -->
           <div class="param-summary">
             <h3 class="summary-title">Parameter Analysis</h3>
             <div class="summary-grid" id="summaryGrid"></div>
           </div>
 
-          <!-- Clinical disclaimer -->
+          <!-- ── Feature 3: Risk Severity Score ────────────────── -->
+          <!-- Gauge SVG is animated by renderSeverityGauge() in JS -->
+          <div class="severity-panel" id="severityPanel">
+            <div class="section-header">
+              <span class="section-tag">03</span>
+              <h3 class="section-title">Risk Severity Score</h3>
+            </div>
+            <div class="severity-body">
+              <!-- Half-circle SVG gauge -->
+              <div class="gauge-wrap">
+                <svg
+                  class="gauge-svg"
+                  viewBox="0 0 200 110"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <!-- Background track -->
+                  <path
+                    d="M20,100 A80,80 0 0,1 180,100"
+                    stroke="rgba(255,255,255,0.07)"
+                    stroke-width="14"
+                    fill="none"
+                    stroke-linecap="round"
+                  />
+                  <!-- Animated fill arc (JS sets stroke-dashoffset) -->
+                  <path
+                    id="gaugeFill"
+                    d="M20,100 A80,80 0 0,1 180,100"
+                    stroke="#e8472a"
+                    stroke-width="14"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-dasharray="251.2"
+                    stroke-dashoffset="251.2"
+                    style="
+                      transition: stroke-dashoffset 1.2s
+                          cubic-bezier(0.4, 0, 0.2, 1),
+                        stroke 0.4s;
+                    "
+                  />
+                  <!-- Animated needle (JS sets transform:rotate) -->
+                  <line
+                    id="gaugeNeedle"
+                    x1="100"
+                    y1="100"
+                    x2="100"
+                    y2="28"
+                    stroke="rgba(255,255,255,0.5)"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    style="
+                      transform-origin: 100px 100px;
+                      transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+                    "
+                  />
+                  <circle
+                    cx="100"
+                    cy="100"
+                    r="5"
+                    fill="rgba(255,255,255,0.3)"
+                  />
+                  <!-- Scale labels -->
+                  <text
+                    x="18"
+                    y="118"
+                    fill="rgba(255,255,255,0.3)"
+                    font-size="9"
+                    font-family="monospace"
+                  >
+                    0
+                  </text>
+                  <text
+                    x="172"
+                    y="118"
+                    fill="rgba(255,255,255,0.3)"
+                    font-size="9"
+                    font-family="monospace"
+                  >
+                    100
+                  </text>
+                </svg>
+                <!-- Score number + level label (JS-populated) -->
+                <div class="gauge-center">
+                  <div class="gauge-score" id="gaugeScore">0</div>
+                  <div class="gauge-label" id="gaugeLabel">—</div>
+                </div>
+              </div>
+              <!-- Per-parameter deviation mini-bars (JS-populated) -->
+              <div class="severity-params" id="severityParams"></div>
+            </div>
+          </div>
+
+          <!-- ── Feature 8: SHAP-style Prediction Explainability ── -->
+          <!-- Bar chart rows injected by renderShapChart() in JS -->
+          <div class="shap-panel" id="shapPanel">
+            <div class="section-header">
+              <span class="section-tag">04</span>
+              <h3 class="section-title">Prediction Explainability</h3>
+              <span class="section-sub">What drove this prediction?</span>
+            </div>
+            <div
+              class="shap-chart"
+              id="shapChart"
+              role="img"
+              aria-label="Feature contribution chart"
+            ></div>
+          </div>
+
+          <!-- ── Feature 1: AI Treatment Suggestions ───────────── -->
+          <!-- Content injected by fetchTreatmentSuggestions() in JS -->
+          <div class="treatment-panel" id="treatmentPanel">
+            <div class="section-header">
+              <span class="section-tag">05</span>
+              <h3 class="section-title">AI Treatment Suggestions</h3>
+              <span class="section-sub">Powered by Groq Llama 3</span>
+            </div>
+            <!-- Loading spinner shown while Groq request is in flight -->
+            <div class="treatment-loading" id="treatmentLoading">
+              <div class="treat-spinner" aria-hidden="true"></div>
+              <span>Generating personalised recommendations…</span>
+            </div>
+            <!-- Treatment content hidden until loaded -->
+            <div
+              class="treatment-body"
+              id="treatmentBody"
+              style="display: none"
+            ></div>
+          </div>
+
+          <!-- ── Clinical Disclaimer ───────────────────────────── -->
           <div class="clinical-note">
-            <div class="note-icon">
+            <div class="note-icon" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
                 <circle
                   cx="10"
@@ -436,29 +649,85 @@
                 />
               </svg>
             </div>
-            
+            <p class="note-text">
+              This report is generated by an AI model for clinical decision
+              support only. It is not a substitute for professional medical
+              diagnosis or advice. Always consult a qualified healthcare
+              provider.
+            </p>
           </div>
 
-          <!-- Export -->
+          <!-- ── Report Action Buttons ─────────────────────────── -->
+          <!-- Two options:
+               1. Send by Email  — requires Brevo API key, sends to any address
+               2. Export / Print — no email needed, opens print dialog in new tab
+                                   ideal for rural or offline use              -->
           <div class="report-actions">
-            <button class="btn-report" onclick="openEmailModal()">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
-                <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13"
-                      stroke="currentColor" stroke-width="1.8"
-                      stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Send report by email (via Brevo) -->
+            <button class="btn-report btn-email" onclick="openEmailModal()">
+              <svg
+                width="17"
+                height="17"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
               </svg>
               Send Report by Email
             </button>
+
+            <!-- Export / print report (no email needed) -->
+            <button
+              class="btn-report btn-export"
+              id="btnExportReport"
+              onclick="exportReport()"
+            >
+              <svg
+                width="17"
+                height="17"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 15V3M12 15L8 11M12 15L16 11"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M3 17V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V17"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                />
+              </svg>
+              Export / Print Report
+            </button>
           </div>
+          <!-- /.report-actions -->
         </div>
         <!-- /.results-body -->
       </div>
       <!-- /.results-container -->
     </section>
+    <!-- /#results -->
 
-    <div class="loading-overlay" id="loadingOverlay">
+    <!-- ════════════════════════════════════════════════════════════
+         LOADING OVERLAY — Shown during /predict request flight
+         Three animated steps give visual feedback on progress.
+    ════════════════════════════════════════════════════════════════ -->
+    <div class="loading-overlay" id="loadingOverlay" aria-live="polite">
       <div class="loading-card">
-        <div class="loading-animation">
+        <div class="loading-animation" aria-hidden="true">
           <div class="scan-ring ring-1"></div>
           <div class="scan-ring ring-2"></div>
           <div class="scan-ring ring-3"></div>
@@ -466,7 +735,7 @@
             <svg width="36" height="36" viewBox="0 0 32 32" fill="none">
               <path
                 d="M16 3 C16 3 5 11 5 19 C5 25.1 9.9 30 16 30
-                     C22.1 30 27 25.1 27 19 C27 11 16 3 16 3Z"
+                       C22.1 30 27 25.1 27 19 C27 11 16 3 16 3Z"
                 fill="#e8472a"
                 opacity="0.8"
               />
@@ -481,79 +750,142 @@
         </div>
       </div>
     </div>
-<!-- ══════════════════════════════════════════
-       EMAIL MODAL
-  ══════════════════════════════════════════ -->
-  <div class="modal-overlay" id="emailModal" onclick="handleModalBackdrop(event)">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
 
-      <!-- Modal header -->
-      <div class="modal-header">
-        <div class="modal-header-left">
-          <div class="modal-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13"
-                    stroke="#e8472a" stroke-width="1.8"
-                    stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div>
+    <!-- ════════════════════════════════════════════════════════════
+         EMAIL MODAL — Collect recipient address and send report
+         Triggered by "Send Report by Email" button in results.
+         Backdrop click or Escape key closes the modal.
+    ════════════════════════════════════════════════════════════════ -->
+    <div
+      class="modal-overlay"
+      id="emailModal"
+      onclick="handleModalBackdrop(event)"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalTitle"
+    >
+      <div class="modal">
+        <!-- Modal header -->
+        <div class="modal-header">
+          <div class="modal-header-left">
+            <div class="modal-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13"
+                  stroke="#e8472a"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
             <h3 class="modal-title" id="modalTitle">Send Report by Email</h3>
           </div>
-        </div>
-        <button class="modal-close" onclick="closeEmailModal()" aria-label="Close">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor"
-                  stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-
-        <!-- Preview strip -->
-        <div class="modal-preview" id="modalPreview">
-          <div class="preview-verdict" id="previewVerdict"></div>
-          <div class="preview-confidence" id="previewConfidence"></div>
-        </div>
-
-        <!-- Email input -->
-        <div class="modal-field">
-          <label class="modal-label" for="emailInput">Recipient email address</label>
-          <div class="modal-input-wrap">
-            <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none">
-              <rect x="2" y="4" width="20" height="16" rx="2"
-                    stroke="currentColor" stroke-width="1.6"/>
-              <path d="M2 7L12 13L22 7" stroke="currentColor"
-                    stroke-width="1.6" stroke-linecap="round"/>
+          <button
+            class="modal-close"
+            onclick="closeEmailModal()"
+            aria-label="Close modal"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M18 6L6 18M6 6L18 18"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+              />
             </svg>
-            <input type="email" id="emailInput" class="modal-input"
-                   placeholder="patient@example.com"
-                   onkeydown="if(event.key==='Enter') sendReportEmail()"/>
-          </div>
+          </button>
         </div>
 
-        <!-- Status message -->
-        <div class="modal-status" id="modalStatus"></div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <!-- Prediction preview strip -->
+          <div class="modal-preview" id="modalPreview">
+            <div class="preview-verdict" id="previewVerdict"></div>
+            <div class="preview-confidence" id="previewConfidence"></div>
+          </div>
 
-      </div><!-- /.modal-body -->
+          <!-- Recipient email address input -->
+          <div class="modal-field">
+            <label class="modal-label" for="emailInput">
+              Recipient email address
+            </label>
+            <div class="modal-input-wrap">
+              <svg
+                class="input-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <rect
+                  x="2"
+                  y="4"
+                  width="20"
+                  height="16"
+                  rx="2"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                />
+                <path
+                  d="M2 7L12 13L22 7"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <input
+                type="email"
+                id="emailInput"
+                class="modal-input"
+                placeholder="patient@example.com"
+                onkeydown="if(event.key==='Enter') sendReportEmail()"
+              />
+            </div>
+          </div>
 
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button class="btn-modal-cancel" onclick="closeEmailModal()">Cancel</button>
-        <button class="btn-modal-send" id="btnSendEmail" onclick="sendReportEmail()">
-          <span id="btnSendLabel">Send Report</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-            <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13"
-                  stroke="currentColor" stroke-width="1.8"
-                  stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
+          <!-- Status / error message -->
+          <div class="modal-status" id="modalStatus" role="status"></div>
+        </div>
+        <!-- /.modal-body -->
+
+        <!-- Modal footer actions -->
+        <div class="modal-footer">
+          <button class="btn-modal-cancel" onclick="closeEmailModal()">
+            Cancel
+          </button>
+          <button
+            class="btn-modal-send"
+            id="btnSendEmail"
+            onclick="sendReportEmail()"
+          >
+            <span id="btnSendLabel">Send Report</span>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
+      <!-- /.modal -->
+    </div>
+    <!-- /.modal-overlay -->
 
-    </div><!-- /.modal -->
-  </div><!-- /.modal-overlay -->
+    <!-- ════════════════════════════════════════════════════════════
+         APPLICATION SCRIPT
+    ════════════════════════════════════════════════════════════════ -->
     <script src="script.js"></script>
   </body>
 </html>

@@ -1,3 +1,23 @@
 Generated,Model,Prediction,Is_Anemia,Confidence_%,Message,Gender,Hemoglobin_g_dL,Hemoglobin_Status,Hemoglobin_Range,MCV_fL,MCV_Status,MCV_Range,MCH_pg,MCH_Status,MCH_Range,MCHC_g_dL,MCHC_Status,MCHC_Range
 "06 Mar 2026, 09:24 PM",RandomForestClassifier,No Anemia,0,100,No anemia detected with 100.0% confidence.,Male,15,Normal,12 – 17 g/dL,80,Normal,80 – 100 fL,30,Normal,27 – 33 pg,37.5,High,32 – 36 g/dL
 "06 Mar 2026, 09:26 PM",RandomForestClassifier,Anemia Detected,1,96,Model predicts normocytic anemia with 96.0% confidence.,Female,8.3,Low,12 – 17 g/dL,95.5,Normal,80 – 100 fL,29,Normal,27 – 33 pg,20,Low,32 – 36 g/dL
+"06 Mar 2026, 09:41 PM",RandomForestClassifier,No Anemia,0,100,No anemia detected with 100.0% confidence.,Male,15,Normal,12 – 17 g/dL,80,Normal,80 – 100 fL,30,Normal,27 – 33 pg,37.5,High,32 – 36 g/dL
+"06 Mar 2026, 09:42 PM",RandomForestClassifier,No Anemia,0,100,No anemia detected with 100.0% confidence.,Male,15,Normal,12 – 17 g/dL,80,Normal,80 – 100 fL,30,Normal,27 – 33 pg,37.5,High,32 – 36 g/dL
+"06 Mar 2026, 09:43 PM",RandomForestClassifier,No Anemia,0,100,No anemia detected with 100.0% confidence.,Male,15,Normal,12 – 17 g/dL,80,Normal,80 – 100 fL,30,Normal,27 – 33 pg,37.5,High,32 – 36 g/dL
+"06 Mar 2026, 09:50 PM",RandomForestClassifier,No Anemia,0,100,No anemia detected with 100.0% confidence.,Male,15,Normal,12 – 17 g/dL,80,Normal,80 – 100 fL,30,Normal,27 – 33 pg,37.5,High,32 – 36 g/dL
+"06 Mar 2026, 09:51 PM",RandomForestClassifier,No Anemia,0,100,No anemia detected with 100.0% confidence.,Male,15,Normal,12 – 17 g/dL,80,Normal,80 – 100 fL,30,Normal,27 – 33 pg,37.5,High,32 – 36 g/dL
+"06 Mar 2026, 10:01 PM",RandomForestClassifier,No Anemia,0,100,No anemia detected with 100.0% confidence.,Male,15,Normal,12 – 17 g/dL,80,Normal,80 – 100 fL,30,Normal,27 – 33 pg,37.5,High,32 – 36 g/dL
+"06 Mar 2026, 10:03 PM",RandomForestClassifier,Anemia Detected,1,100,Model predicts normocytic anemia with 100.0% confidence.,Female,10.8,Low,12 – 17 g/dL,86.4,Normal,80 – 100 fL,28.3,Normal,27 – 33 pg,31.6,Low,32 – 36 g/dL
+"06 Mar 2026, 10:06 PM",RandomForestClassifier,Anemia Detected,1,95,Model predicts microcytic hypochromic anemia with 95.0% confidence.,Female,11.9,Low,12 – 17 g/dL,71.1,Low,80 – 100 fL,25.9,Low,27 – 33 pg,28.3,Low,32 – 36 g/dL
+"06 Mar 2026, 10:19 PM",RandomForestClassifier,No Anemia,0,99,No anemia detected with 99.0% confidence.,Male,18,High,12 – 17 g/dL,74.1,Low,80 – 100 fL,18.7,Low,27 – 33 pg,29.4,Low,32 – 36 g/dL
+"07 Mar 2026, 06:14 AM",RandomForestClassifier,Anemia Detected,1,99,Model predicts macrocytic anemia with 99.0% confidence.,Male,11.4,Low,12–17 g/dL,109,High,80–100 fL,38.6,High,27–33 pg,35.5,Normal,32–36 g/dL
+"07 Mar 2026, 06:14 AM",RandomForestClassifier,Anemia Detected,1,99,Model predicts macrocytic anemia with 99.0% confidence.,Male,11.4,Low,12–17 g/dL,109,High,80–100 fL,38.6,High,27–33 pg,35.5,Normal,32–36 g/dL
+"07 Mar 2026, 06:15 AM",RandomForestClassifier,Anemia Detected,1,99,Model predicts macrocytic anemia with 99.0% confidence.,Male,11.4,Low,12–17 g/dL,109,High,80–100 fL,38.6,High,27–33 pg,35.5,Normal,32–36 g/dL
+"07 Mar 2026, 06:16 AM",RandomForestClassifier,Anemia Detected,1,99,Model predicts macrocytic anemia with 99.0% confidence.,Male,11.4,Low,12–17 g/dL,109,High,80–100 fL,38.6,High,27–33 pg,35.5,Normal,32–36 g/dL
+"07 Mar 2026, 09:22 AM",RandomForestClassifier,No Anemia,0,97,No anemia detected with 97.0% confidence.,Male,15,Normal,12–17 g/dL,72.9,Low,80–100 fL,30,Normal,27–33 pg,37.5,High,32–36 g/dL
+"07 Mar 2026, 09:22 AM",RandomForestClassifier,No Anemia,0,97,No anemia detected with 97.0% confidence.,Male,15,Normal,12–17 g/dL,72.9,Low,80–100 fL,30,Normal,27–33 pg,37.5,High,32–36 g/dL
+"07 Mar 2026, 09:23 AM",RandomForestClassifier,No Anemia,0,97,No anemia detected with 97.0% confidence.,Male,15,Normal,12–17 g/dL,72.9,Low,80–100 fL,30,Normal,27–33 pg,37.5,High,32–36 g/dL
+"07 Mar 2026, 09:59 AM",RandomForestClassifier,Anemia Detected,1,99,Model predicts macrocytic anemia with 99.0% confidence.,Male,11.4,Low,12–17 g/dL,109,High,80–100 fL,38.6,High,27–33 pg,35.5,Normal,32–36 g/dL
+"07 Mar 2026, 09:59 AM",RandomForestClassifier,Anemia Detected,1,99,Model predicts macrocytic anemia with 99.0% confidence.,Male,11.4,Low,12–17 g/dL,109,High,80–100 fL,38.6,High,27–33 pg,35.5,Normal,32–36 g/dL
+"07 Mar 2026, 10:00 AM",RandomForestClassifier,Anemia Detected,1,99,Model predicts macrocytic anemia with 99.0% confidence.,Male,11.4,Low,12–17 g/dL,109,High,80–100 fL,38.6,High,27–33 pg,35.5,Normal,32–36 g/dL
+"07 Mar 2026, 10:00 AM",RandomForestClassifier,Anemia Detected,1,99,Model predicts macrocytic anemia with 99.0% confidence.,Male,11.4,Low,12–17 g/dL,109,High,80–100 fL,38.6,High,27–33 pg,35.5,Normal,32–36 g/dL

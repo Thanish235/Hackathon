@@ -1,5 +1,30 @@
+/* ════════════════════════════════════════════════════════════
+   HemoScan AI  —  Application Stylesheet
+   ════════════════════════════════════════════════════════════
+   Sections
+     1.  Design Tokens (CSS Variables)
+     2.  CSS Reset & Base Styles
+     3.  Background — Mesh Orbs + Noise Overlay
+     4.  Navigation Bar
+     5.  Hero Section
+     6.  CBC Parameter Form
+     7.  AI Upload Panel
+     8.  Results — Verdict Card + Parameter Summary
+     9.  Report Action Buttons (Email + Export)
+    10.  Loading Overlay
+    11.  Email Modal
+    12.  Shared Section Headers (for features 03–05)
+    13.  Risk Severity Gauge  (Feature 3)
+    14.  SHAP Explainability Chart  (Feature 8)
+    15.  AI Treatment Suggestions  (Feature 1)
+   ════════════════════════════════════════════════════════════ */
+
 @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600;700&display=swap");
 
+/* ════════════════════════════════════════════════════════════
+      SECTION 1 — Design Tokens (CSS Custom Properties)
+      All colours, fonts, and spacing variables used throughout.
+      ════════════════════════════════════════════════════════════ */
 :root {
   --blood: #e8472a;
   --blood-dim: #c23518;
@@ -24,6 +49,9 @@
   --font-mono: "IBM Plex Mono", monospace;
 }
 
+/* ════════════════════════════════════════════════════════════
+      SECTION 2 — CSS Reset & Base Styles
+      ════════════════════════════════════════════════════════════ */
 *,
 *::before,
 *::after {
@@ -46,6 +74,9 @@ body {
   position: relative;
 }
 
+/* ════════════════════════════════════════════════════════════
+      SECTION 3 — Background  (Animated mesh orbs + noise overlay)
+      ════════════════════════════════════════════════════════════ */
 .bg-mesh {
   position: fixed;
   inset: 0;
@@ -112,8 +143,11 @@ body {
 }
 
 /* ════════════════════════════════════════════════════════════
-   4.  NAVBAR
-   ════════════════════════════════════════════════════════════ */
+      4.  NAVBAR
+      ════════════════════════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════════════
+      SECTION 4 — Navigation Bar
+      ════════════════════════════════════════════════════════════ */
 .navbar {
   position: sticky;
   top: 0;
@@ -172,6 +206,9 @@ body {
   }
 }
 
+/* ════════════════════════════════════════════════════════════
+      SECTION 5 — Hero Section  (Headline + blood-cell animation)
+      ════════════════════════════════════════════════════════════ */
 .hero {
   position: relative;
   z-index: 10;
@@ -370,8 +407,12 @@ body {
 }
 
 /* ════════════════════════════════════════════════════════════
-   6.  FORM SECTION
-   ════════════════════════════════════════════════════════════ */
+      6.  FORM SECTION
+      ════════════════════════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════════════
+      SECTION 6 — CBC Parameter Form
+      Panels, parameter cards, sliders, status indicators, toggles.
+      ════════════════════════════════════════════════════════════ */
 .form-section {
   position: relative;
   z-index: 10;
@@ -758,6 +799,9 @@ body {
   transform: translateY(0);
 }
 
+/* ════════════════════════════════════════════════════════════
+      SECTION 8 — Results  (Verdict card + parameter summary grid)
+      ════════════════════════════════════════════════════════════ */
 .results-section {
   position: relative;
   z-index: 10;
@@ -998,39 +1042,49 @@ body {
 }
 
 /* ── Clinical disclaimer ── 
-.clinical-note {
-  display: flex;
-  gap: 0.95rem;
-  padding: 1.25rem 1.4rem;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border);
-  border-left: 3px solid rgba(240, 180, 41, 0.5);
-  border-radius: 0 8px 8px 0;
-}
+   .clinical-note {
+     display: flex;
+     gap: 0.95rem;
+     padding: 1.25rem 1.4rem;
+     background: rgba(255, 255, 255, 0.02);
+     border: 1px solid var(--border);
+     border-left: 3px solid rgba(240, 180, 41, 0.5);
+     border-radius: 0 8px 8px 0;
+   }
+   
+   .note-icon {
+     color: var(--yellow);
+     flex-shrink: 0;
+     margin-top: 0.15rem;
+   }
+   
+   .note-text {
+     font-size: 1.2rem;
+     line-height: 1.65;
+     color: var(--text-2);
+   }
+   
+   .note-text strong {
+     color: var(--text);
+     font-weight: 600;
+   }*/
 
-.note-icon {
-  color: var(--yellow);
-  flex-shrink: 0;
-  margin-top: 0.15rem;
-}
+/* ════════════════════════════════════════════════════════════
+      REPORT ACTION BUTTONS
+      Two buttons shown after prediction results:
+        .btn-email  — Send by email (requires Brevo config)
+        .btn-export — Export / Print (no email, works offline)
+      ════════════════════════════════════════════════════════════ */
 
-.note-text {
-  font-size: 1.2rem;
-  line-height: 1.65;
-  color: var(--text-2);
-}
-
-.note-text strong {
-  color: var(--text);
-  font-weight: 600;
-}*/
-
-/* Export button */
+/* Container: two buttons side-by-side, right-aligned */
 .report-actions {
   display: flex;
   justify-content: flex-end;
+  gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
+/* Shared base styles for both action buttons */
 .btn-report {
   display: flex;
   align-items: center;
@@ -1040,21 +1094,42 @@ body {
   border-radius: 7px;
   padding: 0.78rem 1.4rem;
   color: var(--text-2);
-  font-size: 1.2rem;
+  font-size: 0.92rem;
   cursor: pointer;
   transition: all 0.2s;
   font-family: var(--font-body);
 }
 
-.btn-report:hover {
+/* Email button — red accent on hover */
+.btn-email:hover {
   color: var(--text);
   border-color: var(--blood);
   background: rgba(232, 71, 42, 0.06);
 }
 
+/* Export button — green accent on hover (distinct from email) */
+.btn-export {
+  border-color: rgba(42, 219, 122, 0.3);
+}
+
+.btn-export:hover {
+  color: var(--green);
+  border-color: var(--green);
+  background: rgba(42, 219, 122, 0.06);
+}
+
+/* Disabled state for export button while report is being prepared */
+.btn-export:disabled,
+.btn-email:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
 /* ════════════════════════════════════════════════════════════
-   9.  LOADING OVERLAY
-   ════════════════════════════════════════════════════════════ */
+      SECTION 10 — Loading Overlay
+      Shown during /predict request. Three-step progress indicator.
+      ════════════════════════════════════════════════════════════ */
 .loading-overlay {
   position: fixed;
   inset: 0;
@@ -1174,8 +1249,8 @@ body {
 }
 
 /* ════════════════════════════════════════════════════════════
-   10. KEYFRAME UTILITIES
-   ════════════════════════════════════════════════════════════ */
+      10. KEYFRAME UTILITIES
+      ════════════════════════════════════════════════════════════ */
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -1197,8 +1272,8 @@ body {
 }
 
 /* ════════════════════════════════════════════════════════════
-   11. RESPONSIVE BREAKPOINTS
-   ════════════════════════════════════════════════════════════ */
+      11. RESPONSIVE BREAKPOINTS
+      ════════════════════════════════════════════════════════════ */
 @media (max-width: 1100px) {
   .hero {
     grid-template-columns: 1fr;
@@ -1245,8 +1320,8 @@ body {
 }
 
 /* ════════════════════════════════════════════════════════════
-   12. CUSTOM SCROLLBAR
-   ════════════════════════════════════════════════════════════ */
+      12. CUSTOM SCROLLBAR
+      ════════════════════════════════════════════════════════════ */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -1261,8 +1336,8 @@ body {
   background: var(--blood);
 }
 /* ════════════════════════════════════════════════════════════
-   GEMINI UPLOAD PANEL
-   ════════════════════════════════════════════════════════════ */
+      GEMINI UPLOAD PANEL
+      ════════════════════════════════════════════════════════════ */
 .upload-zone {
   border: 2px dashed rgba(232, 71, 42, 0.3);
   border-radius: 12px;
@@ -1364,7 +1439,11 @@ body {
   color: var(--blood);
 }
 /* ════════════════════════════════════════════════════════════
-      11. EMAIL MODAL
+         11. EMAIL MODAL
+         ════════════════════════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════════════
+      SECTION 11 — Email Modal
+      Overlay, modal card, input, status, and action buttons.
       ════════════════════════════════════════════════════════════ */
 .modal-overlay {
   position: fixed;
@@ -1605,4 +1684,310 @@ body {
   opacity: 0.4;
   cursor: not-allowed;
   transform: none;
+}
+
+/* ════════════════════════════════════════════════════════════
+      SECTION 12 — Shared Section Headers
+      Used by the severity, SHAP, and treatment panels (03–05).
+      ════════════════════════════════════════════════════════════ */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.4rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--border);
+}
+.section-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-3);
+  letter-spacing: 0.08em;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+.section-title {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  flex: 1;
+}
+.section-sub {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-3);
+  letter-spacing: 0.04em;
+}
+
+/* ════════════════════════════════════════════════════════════
+      SECTION 13 — Risk Severity Gauge  (Feature 3)
+      Half-circle SVG gauge with animated arc + per-param bars.
+      ════════════════════════════════════════════════════════════ */
+.severity-panel {
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.6rem 1.8rem;
+  margin-bottom: 1.2rem;
+}
+.severity-body {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.gauge-wrap {
+  position: relative;
+  width: 200px;
+  flex-shrink: 0;
+}
+.gauge-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.gauge-center {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  pointer-events: none;
+}
+.gauge-score {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+.gauge-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  margin-top: 2px;
+  text-transform: uppercase;
+}
+
+/* per-param mini bars */
+.severity-params {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  min-width: 180px;
+}
+.sev-param-row {
+  display: grid;
+  grid-template-columns: 48px 1fr 40px;
+  align-items: center;
+  gap: 0.6rem;
+}
+.sev-param-name {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-2);
+  text-align: right;
+}
+.sev-bar-track {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.sev-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 0%;
+}
+.sev-param-pct {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-align: right;
+}
+
+/* ════════════════════════════════════════════════════════════
+      SECTION 14 — SHAP Explainability Chart  (Feature 8)
+      Animated horizontal bar chart; red = above normal, green = below.
+      ════════════════════════════════════════════════════════════ */
+.shap-panel {
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.6rem 1.8rem;
+  margin-bottom: 1.2rem;
+}
+.shap-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.shap-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 44px 130px;
+  align-items: center;
+  gap: 0.75rem;
+  opacity: 0;
+  animation: shapFadeIn 0.4s ease forwards;
+}
+@keyframes shapFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.shap-feat-name {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-2);
+  text-align: right;
+  white-space: nowrap;
+}
+.shap-bar-wrap {
+  height: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 99px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.shap-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  width: 0%;
+}
+.shap-pct {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-align: right;
+}
+.shap-dir {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-3);
+  letter-spacing: 0.03em;
+}
+
+/* ════════════════════════════════════════════════════════════
+      SECTION 15 — AI Treatment Suggestions  (Feature 1)
+      Loading spinner, summary strip, 3-column card grid, doctor alert.
+      ════════════════════════════════════════════════════════════ */
+.treatment-panel {
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.6rem 1.8rem;
+  margin-bottom: 1.2rem;
+}
+.treatment-loading {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  color: var(--text-3);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  padding: 1.2rem 0;
+}
+.treat-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(232, 71, 42, 0.25);
+  border-top-color: var(--blood);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.treat-summary {
+  font-size: 0.92rem;
+  color: var(--text-2);
+  line-height: 1.65;
+  padding: 0.9rem 1.1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 3px solid var(--blood);
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 1.2rem;
+}
+.treat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.treat-section {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+}
+.treat-sec-title {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.65rem;
+  letter-spacing: -0.01em;
+}
+.treat-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.treat-list li {
+  font-size: 0.8rem;
+  color: var(--text-2);
+  line-height: 1.45;
+  padding-left: 0.9rem;
+  position: relative;
+}
+.treat-list li::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  color: var(--blood);
+  font-weight: 700;
+}
+.treat-doctor {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  background: rgba(232, 71, 42, 0.07);
+  border: 1px solid rgba(232, 71, 42, 0.2);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.83rem;
+  color: var(--text-2);
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+.treat-disclaimer {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-3);
+  line-height: 1.5;
+  border-top: 1px solid var(--border);
+  padding-top: 0.75rem;
+}
+.treat-error {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--blood);
+  padding: 0.75rem 0;
 }
