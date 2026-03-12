@@ -49,8 +49,8 @@ Anemia affects **1.6 billion people worldwide**, yet most cases go undetected be
 
 ```
 HemoScan-AI/
-├── app.py                      # Flask backend (17 sections)
-├── script.js                   # Frontend logic (19 sections)
+├── app.py                      # Flask backend 
+├── script.js                   # Frontend logic 
 ├── index.html                  # UI layout
 ├── styles.css                  # Styling & animations
 ├── model5-2.pkl                # Trained RandomForest model
