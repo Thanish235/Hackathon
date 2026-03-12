@@ -1,59 +1,15 @@
-/* ════════════════════════════════════════════════════════════════════
-   HemoScan AI  —  Frontend Application Logic
-   ════════════════════════════════════════════════════════════════════
-   Sections
-     1.  Global State
-     2.  Parameter Configuration
-     3.  Gender Selector
-     4.  Slider ↔ Input Sync
-     5.  Real-time Parameter Evaluation
-     6.  Form Reset
-     7.  Input Validation
-     8.  Toast Notifications
-     9.  Loading Overlay
-    10.  Prediction  (POST /predict)
-    11.  Results Rendering
-    12.  Risk Severity Gauge  (Feature 3)
-    13.  SHAP Explainability Chart  (Feature 8)
-    14.  AI Treatment Suggestions  (Feature 1)
-    15.  Navigation
-    16.  AI File Upload & CBC Auto-Extraction
-    17.  Email Modal  (POST /send-report via Brevo)
-    18.  Export Report  (POST /export-report → print/PDF)
-    19.  Initialisation
-   ════════════════════════════════════════════════════════════════════ */
-
 "use strict";
 
-/* ════════════════════════════════════════════════════════════════════
-      SECTION 1 — Global State
-      Variables persisted across function calls and reused by the email
-      modal, export function, and treatment panel.
-      ════════════════════════════════════════════════════════════════════ */
+/* SECTION 1 — Global State */
 
-/** Currently selected biological sex ('male' | 'female') */
 let selectedGender = "male";
-
-/** Last successful prediction result — used by email modal & export */
 let lastPredictionData = null;
-
-/** Last CBC parameter values — used by email modal & export */
 let lastParamData = null;
-
-/** Last computed risk severity object — included in email & export */
 let lastSeverityData = null;
-
-/** Last SHAP importances list — included in email & export */
 let lastShapData = null;
-
-/** Last AI treatment suggestions — included in email & export */
 let lastTreatmentData = null;
 
-/* ════════════════════════════════════════════════════════════════════
-      SECTION 2 — Parameter Configuration
-      Single source of truth for each CBC parameter: input/slider IDs,
-      value range, normal range, label, and unit.
-      ════════════════════════════════════════════════════════════════════ */
+/* SECTION 2 — Parameter Configuration */
 
 const PARAMS = {
   hgb: {
@@ -106,14 +62,8 @@ const PARAMS = {
   },
 };
 
-/* ════════════════════════════════════════════════════════════════════
-      SECTION 3 — Gender Selector
-      ════════════════════════════════════════════════════════════════════ */
+/* SECTION 3 — Gender Selector */
 
-/**
- * Marks the clicked gender toggle as active and updates global state.
- * Called via onclick="selectGender(this)" on each .toggle-btn.
- */
 function selectGender(btn) {
   document
     .querySelectorAll(".toggle-btn")
@@ -122,16 +72,8 @@ function selectGender(btn) {
   selectedGender = btn.dataset.value;
 }
 
-/* ════════════════════════════════════════════════════════════════════
-      SECTION 4 — Slider ↔ Input Sync
-      Keeps the number input and range slider in two-way sync,
-      and redraws the custom fill bar on every change.
-      ════════════════════════════════════════════════════════════════════ */
+/* SECTION 4 — Slider */
 
-/**
- * Called when a number input changes.
- * Mirrors the value onto the corresponding range slider + fill bar.
- */
 function updateSlider(key, value, min, max) {
   const cfg = PARAMS[key];
   const slider = document.getElementById(cfg.sliderId);
@@ -145,10 +87,6 @@ function updateSlider(key, value, min, max) {
   evaluateParam(key, parseFloat(value));
 }
 
-/**
- * Called when a range slider changes.
- * Mirrors the value back into the corresponding number input.
- */
 function syncInput(inputId, value) {
   const input = document.getElementById(inputId);
   input.value = value;
@@ -162,11 +100,7 @@ function syncInput(inputId, value) {
   evaluateParam(key, parseFloat(value));
 }
 
-/* ════════════════════════════════════════════════════════════════════
-      SECTION 5 — Real-time Parameter Evaluation
-      Shows a coloured status line (Low / High / Normal) below each
-      input field as the user types or drags the slider.
-      ════════════════════════════════════════════════════════════════════ */
+/* SECTION 5 — Real-time Parameter Evaluation */
 
 function evaluateParam(key, value) {
   const cfg = PARAMS[key];
@@ -190,10 +124,6 @@ function evaluateParam(key, value) {
   }
 }
 
-/**
- * Returns { label, cls } for use in the results summary cards.
- * cls is one of: 'low' | 'high' | 'normal'
- */
 function getStatusTag(key, value) {
   const cfg = PARAMS[key];
   if (value < cfg.normalMin) return { label: "Low", cls: "low" };
@@ -201,19 +131,13 @@ function getStatusTag(key, value) {
   return { label: "Normal", cls: "normal" };
 }
 
-/* ════════════════════════════════════════════════════════════════════
-      SECTION 6 — Form Reset
-      Clears all inputs, sliders, fill bars, status indicators, results
-      section, and all global state variables.
-      ════════════════════════════════════════════════════════════════════ */
+/* SECTION 6 — Form Reset */
 
 function resetForm() {
-  // Clear number inputs
   ["hemoglobin", "mcv", "mch", "mchc"].forEach((id) => {
     document.getElementById(id).value = "";
   });
 
-  // Reset sliders, fill bars, and status labels
   Object.keys(PARAMS).forEach((key) => {
     const cfg = PARAMS[key];
     document.getElementById(cfg.sliderId).value = cfg.min;
@@ -241,11 +165,7 @@ function resetForm() {
   lastTreatmentData = null;
 }
 
-/* ════════════════════════════════════════════════════════════════════
-      SECTION 7 — Input Validation
-      Checks all four CBC fields are filled with valid non-negative numbers
-      before allowing a prediction to proceed.
-      ════════════════════════════════════════════════════════════════════ */
+/* SECTION 7 — Input Validation */
 
 function validateInputs() {
   const fields = [
@@ -272,11 +192,7 @@ function validateInputs() {
   return true;
 }
 
-/* ════════════════════════════════════════════════════════════════════
-      SECTION 8 — Toast Notifications
-      Displays a brief non-blocking notification at the bottom of the
-      screen. Auto-dismisses after 3.5 seconds.
-      ════════════════════════════════════════════════════════════════════ */
+/* SECTION 8 — Toast Notifications */
 
 function showToast(message) {
   const existing = document.querySelector(".toast");
@@ -316,11 +232,7 @@ function showToast(message) {
   setTimeout(() => toast.remove(), 3500);
 }
 
-/* ════════════════════════════════════════════════════════════════════
-      SECTION 9 — Loading Overlay
-      Animates the three loading steps (Validating → Running AI → Generating)
-      while the prediction request is in flight.
-      ════════════════════════════════════════════════════════════════════ */
+/* SECTION 9 — Loading Overlay */
 
 function animateLoadingSteps() {
   const stepIds = ["step1", "step2", "step3"];
@@ -352,13 +264,7 @@ function resetLoadingSteps() {
   });
 }
 
-/* ════════════════════════════════════════════════════════════════════
-      SECTION 10 — Prediction  (POST /predict)
-   
-      Model  : RandomForestClassifier (model5.pkl, 100 trees)
-      Input  : Gender (0/1), Hemoglobin, MCH, MCHC, MCV
-      Output : prediction, confidence, severity score, SHAP importances
-      ════════════════════════════════════════════════════════════════════ */
+/* SECTION 10 — Prediction  (POST /predict) */
 
 async function runPrediction() {
   if (!validateInputs()) return;
@@ -409,11 +315,7 @@ async function runPrediction() {
   }
 }
 
-/* ════════════════════════════════════════════════════════════════════
-      SECTION 11 — Results Rendering
-      Populates the verdict card, confidence bar, and parameter summary
-      grid from the prediction response.
-      ════════════════════════════════════════════════════════════════════ */
+/* SECTION 11 — Results Rendering */
 
 function displayResults(data, params) {
   const isAnemia = data.is_anemia;
@@ -526,11 +428,7 @@ function displayResults(data, params) {
   }, 100);
 }
 
-/* ════════════════════════════════════════════════════════════════════
-      SECTION 12 — Risk Severity Gauge  (Feature 3)
-      Animates the SVG arc, rotates the needle, counts up the score
-      number, and renders per-parameter deviation mini-bars.
-      ════════════════════════════════════════════════════════════════════ */
+/* SECTION 12 — Risk Severity Gauge */
 
 function renderSeverityGauge(severity) {
   const score = severity.score || 0;
@@ -601,11 +499,7 @@ function renderSeverityGauge(severity) {
     .join("");
 }
 
-/* ════════════════════════════════════════════════════════════════════
-      SECTION 13 — SHAP-style Explainability Chart  (Feature 8)
-      Renders animated horizontal bars with staggered entry delays.
-      Red = value above normal centre | Green = value below normal centre.
-      ════════════════════════════════════════════════════════════════════ */
+/* SECTION 13 — SHAP-style Explainability Chart */
 
 function renderShapChart(shapData, isAnemia) {
   const container = document.getElementById("shapChart");
@@ -641,12 +535,7 @@ function renderShapChart(shapData, isAnemia) {
   });
 }
 
-/* ════════════════════════════════════════════════════════════════════
-      SECTION 14 — AI Treatment Suggestions  (Feature 1)
-      Fetches from POST /treatment asynchronously after prediction so it
-      never blocks the results UI. Stores the result in lastTreatmentData
-      for inclusion in email and export reports.
-      ════════════════════════════════════════════════════════════════════ */
+/* SECTION 14 — AI Treatment Suggestions  */
 
 async function fetchTreatmentSuggestions(predData, paramData) {
   const loadingEl = document.getElementById("treatmentLoading");
@@ -717,9 +606,7 @@ async function fetchTreatmentSuggestions(predData, paramData) {
   }
 }
 
-/* ════════════════════════════════════════════════════════════════════
-      SECTION 15 — Navigation
-      ════════════════════════════════════════════════════════════════════ */
+/* SECTION 15 — Navigation */
 
 /** Hides the results section and scrolls back to the top of the form. */
 function newPrediction() {
@@ -727,11 +614,7 @@ function newPrediction() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-/* ════════════════════════════════════════════════════════════════════
-      SECTION 16 — AI File Upload & CBC Auto-Extraction
-      Handles drag-and-drop and file-picker uploads, then calls
-      POST /extract to auto-fill the CBC form fields.
-      ════════════════════════════════════════════════════════════════════ */
+/* SECTION 16 — AI File Upload & CBC Auto-Extraction */
 
 let selectedFile = null;
 
@@ -818,12 +701,7 @@ async function extractValues() {
   }
 }
 
-/* ════════════════════════════════════════════════════════════════════
-      SECTION 17 — Email Modal  (POST /send-report via Brevo)
-      Opens a modal where the user enters a recipient email address,
-      then POSTs the full report data (including severity, SHAP, and
-      treatment) to /send-report which emails it via Brevo.
-      ════════════════════════════════════════════════════════════════════ */
+/* SECTION 17 — Email Modal  (POST /send-report via Brevo)*/
 
 /** Opens the email modal and pre-fills the prediction preview strip. */
 function openEmailModal() {
@@ -866,12 +744,6 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeEmailModal();
 });
 
-/**
- * Sends the full prediction report to the entered email address.
- * Includes severity, SHAP, and treatment data if already loaded.
- * Note: treatment data is fetched async — wait for the treatment
- * panel to finish loading before sending for a complete report.
- */
 async function sendReportEmail() {
   const emailInput = document.getElementById("emailInput");
   const status = document.getElementById("modalStatus");
@@ -931,21 +803,7 @@ async function sendReportEmail() {
   }
 }
 
-/* ════════════════════════════════════════════════════════════════════
-      SECTION 18 — Export Report  (POST /export-report → print / PDF)
-   
-      Sends the full report data to POST /export-report which returns the
-      complete inline-styled HTML. The HTML is opened in a new browser
-      tab and window.print() is triggered automatically.
-   
-      The user can then:
-        • Print to paper on any connected printer
-        • Save as PDF using "Save as PDF" in the browser's print dialog
-        • Share the file digitally without needing email
-   
-      This is especially useful in rural areas or clinics without
-      reliable email access.
-      ════════════════════════════════════════════════════════════════════ */
+/* SECTION 18 — Export Report  (POST /export-report → print / PDF) */
 
 async function exportReport() {
   if (!lastPredictionData) {
@@ -1001,11 +859,7 @@ async function exportReport() {
   }
 }
 
-/* ════════════════════════════════════════════════════════════════════
-      SECTION 19 — Initialisation
-      Runs once on page load to set the initial fill position of all
-      slider track-fill bars from their default values.
-      ════════════════════════════════════════════════════════════════════ */
+/* SECTION 19 — Initialisation */
 
 (function initSliderFills() {
   Object.keys(PARAMS).forEach((key) => {

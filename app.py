@@ -1,26 +1,5 @@
-"""
-╔══════════════════════════════════════════════════════════════════════╗
-║              HemoScan AI  —  Flask Application Backend               ║
-║                                                                      ║
-║  Model   : RandomForestClassifier  (model5.pkl)                      ║
-║  Features: Gender · Hemoglobin · MCH · MCHC · MCV                   ║
-║  AI      : Groq Llama 3.1-8b-instant  (CBC extraction + treatment)  ║
-║  Email   : Brevo transactional API  (send to any address, free)      ║
-║                                                                      ║
-║  Routes                                                              ║
-║    GET  /               → serve index.html                           ║
-║    POST /predict        → run RandomForest, return prediction        ║
-║    POST /extract        → OCR/PDF → Groq → extract CBC values        ║
-║    GET  /model-info     → feature importances & metadata             ║
-║    POST /treatment      → severity score + Groq treatment advice     ║
-║    POST /send-report    → build + email full HTML report via Brevo   ║
-║    POST /export-report  → build + return printable HTML report       ║
-╚══════════════════════════════════════════════════════════════════════╝
-"""
-
-# ══════════════════════════════════════════════════════════════════════
 # SECTION 1 — Imports
-# ══════════════════════════════════════════════════════════════════════
+
 
 import os
 import re
@@ -57,7 +36,7 @@ app = Flask(__name__, static_folder=".", static_url_path="")
 # SECTION 3 — ML Model Loading  (RandomForestClassifier)
 # ══════════════════════════════════════════════════════════════════════
 
-MODEL_PATH = "model5.pkl"
+MODEL_PATH = "model5-2.pkl"
 
 try:
     with open(MODEL_PATH, "rb") as _f:
@@ -84,16 +63,7 @@ else:
 
 # ══════════════════════════════════════════════════════════════════════
 # SECTION 5 — Brevo Email Configuration
-#
-#  Brevo (formerly Sendinblue) free tier:
-#    • 300 emails / day
-#    • Send to ANY recipient (no sandbox restriction unlike Resend)
-#    • No domain verification required to get started
-#
-#  Required .env keys:
-#    BREVO_API_KEY       — from Brevo dashboard → SMTP & API → API Keys
-#    BREVO_SENDER_EMAIL  — verified sender address in Brevo dashboard
-#    BREVO_SENDER_NAME   — display name shown in the recipient's inbox
+#=
 # ══════════════════════════════════════════════════════════════════════
 
 BREVO_API_KEY      = os.getenv("BREVO_API_KEY")
@@ -126,12 +96,6 @@ def encode_gender(gender: str) -> int:
 
 
 def anemia_subtype(mcv: float, mch: float) -> str:
-    """Classify anemia subtype from MCV and MCH values.
-
-    Microcytic hypochromic : MCV < 80  AND  MCH < 27  (e.g. iron deficiency)
-    Macrocytic             : MCV > 100                 (e.g. B12/folate deficiency)
-    Normocytic             : everything else            (e.g. chronic disease)
-    """
     if mcv < 80 and mch < 27:
         return "microcytic hypochromic anemia"
     if mcv > 100:
@@ -139,19 +103,22 @@ def anemia_subtype(mcv: float, mch: float) -> str:
     return "normocytic anemia"
 
 
-def build_features(g: int, hb: float, mch: float,
-                   mchc: float, mcv: float) -> "pd.DataFrame":
-    """Build a single-row DataFrame matching the model's expected feature order."""
+def build_features(hb: float, mcv: float, mch: float,
+                   mchc: float, g: int) -> "pd.DataFrame":
+    """Build a single-row DataFrame matching the model's expected feature order.
+
+    New model (model5-2.pkl) trained on BALANCED_ANEMIA_DATASET.csv expects:
+    ['Hemoglobin', 'MCV', 'MCH', 'MCHC', 'Gender']
+    Dataset: 65,796 balanced samples | Accuracy: 99.97%
+    """
     return pd.DataFrame(
-        [[g, hb, mch, mchc, mcv]],
-        columns=["Gender", "Hemoglobin", "MCH", "MCHC", "MCV"]
+        [[hb, mcv, mch, mchc, g]],
+        columns=["Hemoglobin", "MCV", "MCH", "MCHC", "Gender"]
     )
 
 
 # ══════════════════════════════════════════════════════════════════════
 # SECTION 8 — Text Extraction from Uploaded Files
-#   • PDFs  → pdfplumber (text layer, no OCR needed)
-#   • Images → Tesseract OCR via pytesseract
 # ══════════════════════════════════════════════════════════════════════
 
 def extract_text_from_pdf(file) -> str:
@@ -173,16 +140,9 @@ def extract_text_from_image(file) -> str:
 
 # ══════════════════════════════════════════════════════════════════════
 # SECTION 9 — Groq: CBC Value Extraction from Raw Text
-#   Sends extracted report text to Groq Llama 3 and asks it to return
-#   the four CBC values as structured JSON.
 # ══════════════════════════════════════════════════════════════════════
 
 def extract_cbc_with_groq(text: str) -> dict:
-    """Use Groq Llama 3 to parse CBC values from free-form report text.
-
-    Returns a dict: { hemoglobin, mcv, mch, mchc }
-    Any value that cannot be found is returned as None.
-    """
     prompt = f"""Extract these CBC values from the medical report.
 
 Return ONLY valid JSON — no explanation, no markdown fences.
@@ -866,10 +826,13 @@ def predict():
     except (KeyError, ValueError, TypeError):
         return jsonify({"error": "Invalid inputs — check all CBC fields"}), 400
 
-    features   = build_features(gender, hb, mch, mchc, mcv)
+    # Build feature matrix in new model's expected order:
+    # ['Hemoglobin', 'MCV', 'MCH', 'MCHC', 'Gender']
+    features   = build_features(hb, mcv, mch, mchc, gender)
     pred       = rf_model.predict(features)[0]
     proba      = rf_model.predict_proba(features)[0]
-    is_anemia  = pred == 1
+    # Classes are floats (0.0 / 1.0) in the new dataset
+    is_anemia  = float(pred) == 1.0
     confidence = float(proba[1] if is_anemia else proba[0]) * 100
 
     if is_anemia:

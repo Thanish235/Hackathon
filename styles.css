@@ -1,30 +1,6 @@
-/* ════════════════════════════════════════════════════════════
-   HemoScan AI  —  Application Stylesheet
-   ════════════════════════════════════════════════════════════
-   Sections
-     1.  Design Tokens (CSS Variables)
-     2.  CSS Reset & Base Styles
-     3.  Background — Mesh Orbs + Noise Overlay
-     4.  Navigation Bar
-     5.  Hero Section
-     6.  CBC Parameter Form
-     7.  AI Upload Panel
-     8.  Results — Verdict Card + Parameter Summary
-     9.  Report Action Buttons (Email + Export)
-    10.  Loading Overlay
-    11.  Email Modal
-    12.  Shared Section Headers (for features 03–05)
-    13.  Risk Severity Gauge  (Feature 3)
-    14.  SHAP Explainability Chart  (Feature 8)
-    15.  AI Treatment Suggestions  (Feature 1)
-   ════════════════════════════════════════════════════════════ */
-
 @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600;700&display=swap");
 
-/* ════════════════════════════════════════════════════════════
-      SECTION 1 — Design Tokens (CSS Custom Properties)
-      All colours, fonts, and spacing variables used throughout.
-      ════════════════════════════════════════════════════════════ */
+/* SECTION 1  */
 :root {
   --blood: #e8472a;
   --blood-dim: #c23518;
@@ -49,9 +25,7 @@
   --font-mono: "IBM Plex Mono", monospace;
 }
 
-/* ════════════════════════════════════════════════════════════
-      SECTION 2 — CSS Reset & Base Styles
-      ════════════════════════════════════════════════════════════ */
+/* SECTION 2 */
 *,
 *::before,
 *::after {
@@ -74,9 +48,7 @@ body {
   position: relative;
 }
 
-/* ════════════════════════════════════════════════════════════
-      SECTION 3 — Background  (Animated mesh orbs + noise overlay)
-      ════════════════════════════════════════════════════════════ */
+/* SECTION 3 */
 .bg-mesh {
   position: fixed;
   inset: 0;
@@ -132,7 +104,6 @@ body {
   }
 }
 
-/* Subtle noise texture overlay */
 .noise-overlay {
   position: fixed;
   inset: 0;
@@ -142,12 +113,7 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
-/* ════════════════════════════════════════════════════════════
-      4.  NAVBAR
-      ════════════════════════════════════════════════════════════ */
-/* ════════════════════════════════════════════════════════════
-      SECTION 4 — Navigation Bar
-      ════════════════════════════════════════════════════════════ */
+/* SECTION 4 — Navigation Bar */
 .navbar {
   position: sticky;
   top: 0;
@@ -206,9 +172,7 @@ body {
   }
 }
 
-/* ════════════════════════════════════════════════════════════
-      SECTION 5 — Hero Section  (Headline + blood-cell animation)
-      ════════════════════════════════════════════════════════════ */
+/* SECTION 5 — Hero Section  */
 .hero {
   position: relative;
   z-index: 10;
@@ -406,13 +370,7 @@ body {
   filter: drop-shadow(0 0 20px rgba(232, 71, 42, 0.6));
 }
 
-/* ════════════════════════════════════════════════════════════
-      6.  FORM SECTION
-      ════════════════════════════════════════════════════════════ */
-/* ════════════════════════════════════════════════════════════
-      SECTION 6 — CBC Parameter Form
-      Panels, parameter cards, sliders, status indicators, toggles.
-      ════════════════════════════════════════════════════════════ */
+/* SECTION 6 — CBC Parameter Form */
 .form-section {
   position: relative;
   z-index: 10;
@@ -799,9 +757,7 @@ body {
   transform: translateY(0);
 }
 
-/* ════════════════════════════════════════════════════════════
-      SECTION 8 — Results  (Verdict card + parameter summary grid)
-      ════════════════════════════════════════════════════════════ */
+/* SECTION 8 — Results */
 .results-section {
   position: relative;
   z-index: 10;
@@ -834,7 +790,7 @@ body {
   border-radius: 6px;
   padding: 0.5rem 1.15rem;
   color: var(--text-2);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   cursor: pointer;
   transition: all 0.2s;
   font-family: var(--font-body);
@@ -895,7 +851,7 @@ body {
 
 .verdict-label {
   font-family: var(--font-mono);
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-3);
@@ -904,7 +860,7 @@ body {
 
 .verdict-title {
   font-family: var(--font-display);
-  font-size: 2.3rem;
+  font-size: 2.5rem;
   line-height: 1.1;
   margin-bottom: 0.45rem;
 }
@@ -917,7 +873,7 @@ body {
 }
 
 .verdict-subtitle {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   color: var(--text-2);
   line-height: 1.6;
 }
@@ -930,7 +886,7 @@ body {
 
 .conf-label {
   font-family: var(--font-mono);
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-3);
@@ -939,7 +895,7 @@ body {
 
 .conf-value {
   font-family: var(--font-display);
-  font-size: 3rem;
+  font-size: 3.2rem;
   color: var(--text);
   line-height: 1;
   margin-bottom: 0.5rem;
@@ -1041,42 +997,8 @@ body {
   color: #c07ef0;
 }
 
-/* ── Clinical disclaimer ── 
-   .clinical-note {
-     display: flex;
-     gap: 0.95rem;
-     padding: 1.25rem 1.4rem;
-     background: rgba(255, 255, 255, 0.02);
-     border: 1px solid var(--border);
-     border-left: 3px solid rgba(240, 180, 41, 0.5);
-     border-radius: 0 8px 8px 0;
-   }
-   
-   .note-icon {
-     color: var(--yellow);
-     flex-shrink: 0;
-     margin-top: 0.15rem;
-   }
-   
-   .note-text {
-     font-size: 1.2rem;
-     line-height: 1.65;
-     color: var(--text-2);
-   }
-   
-   .note-text strong {
-     color: var(--text);
-     font-weight: 600;
-   }*/
+/* REPORT ACTION BUTTONS */
 
-/* ════════════════════════════════════════════════════════════
-      REPORT ACTION BUTTONS
-      Two buttons shown after prediction results:
-        .btn-email  — Send by email (requires Brevo config)
-        .btn-export — Export / Print (no email, works offline)
-      ════════════════════════════════════════════════════════════ */
-
-/* Container: two buttons side-by-side, right-aligned */
 .report-actions {
   display: flex;
   justify-content: flex-end;
@@ -1084,7 +1006,6 @@ body {
   flex-wrap: wrap;
 }
 
-/* Shared base styles for both action buttons */
 .btn-report {
   display: flex;
   align-items: center;
@@ -1100,14 +1021,14 @@ body {
   font-family: var(--font-body);
 }
 
-/* Email button — red accent on hover */
+/* Email button */
 .btn-email:hover {
   color: var(--text);
   border-color: var(--blood);
   background: rgba(232, 71, 42, 0.06);
 }
 
-/* Export button — green accent on hover (distinct from email) */
+/* Export button  */
 .btn-export {
   border-color: rgba(42, 219, 122, 0.3);
 }
@@ -1118,7 +1039,6 @@ body {
   background: rgba(42, 219, 122, 0.06);
 }
 
-/* Disabled state for export button while report is being prepared */
 .btn-export:disabled,
 .btn-email:disabled {
   opacity: 0.45;
@@ -1126,10 +1046,7 @@ body {
   transform: none;
 }
 
-/* ════════════════════════════════════════════════════════════
-      SECTION 10 — Loading Overlay
-      Shown during /predict request. Three-step progress indicator.
-      ════════════════════════════════════════════════════════════ */
+/* SECTION 10 — Loading Overlay */
 .loading-overlay {
   position: fixed;
   inset: 0;
@@ -1248,9 +1165,7 @@ body {
   content: "✓ ";
 }
 
-/* ════════════════════════════════════════════════════════════
-      10. KEYFRAME UTILITIES
-      ════════════════════════════════════════════════════════════ */
+/* 10. KEYFRAME UTILITIES */
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -1271,9 +1186,7 @@ body {
   }
 }
 
-/* ════════════════════════════════════════════════════════════
-      11. RESPONSIVE BREAKPOINTS
-      ════════════════════════════════════════════════════════════ */
+/* 11. RESPONSIVE BREAKPOINTS */
 @media (max-width: 1100px) {
   .hero {
     grid-template-columns: 1fr;
@@ -1319,9 +1232,7 @@ body {
   }
 }
 
-/* ════════════════════════════════════════════════════════════
-      12. CUSTOM SCROLLBAR
-      ════════════════════════════════════════════════════════════ */
+/* 12. CUSTOM SCROLLBAR */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -1335,9 +1246,7 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--blood);
 }
-/* ════════════════════════════════════════════════════════════
-      GEMINI UPLOAD PANEL
-      ════════════════════════════════════════════════════════════ */
+/* GEMINI UPLOAD PANEL */
 .upload-zone {
   border: 2px dashed rgba(232, 71, 42, 0.3);
   border-radius: 12px;
@@ -1438,13 +1347,8 @@ body {
 .extract-status.error {
   color: var(--blood);
 }
-/* ════════════════════════════════════════════════════════════
-         11. EMAIL MODAL
-         ════════════════════════════════════════════════════════════ */
-/* ════════════════════════════════════════════════════════════
-      SECTION 11 — Email Modal
-      Overlay, modal card, input, status, and action buttons.
-      ════════════════════════════════════════════════════════════ */
+
+/* SECTION 11 — Email Modal */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -1482,7 +1386,6 @@ body {
   }
 }
 
-/* Modal header */
 .modal-header {
   display: flex;
   align-items: center;
@@ -1531,7 +1434,6 @@ body {
   background: var(--surface-hover);
 }
 
-/* Modal body */
 .modal-body {
   padding: 1.8rem;
   display: flex;
@@ -1539,7 +1441,6 @@ body {
   gap: 1.3rem;
 }
 
-/* Preview strip */
 .modal-preview {
   display: flex;
   align-items: center;
@@ -1566,7 +1467,6 @@ body {
   letter-spacing: 0.04em;
 }
 
-/* Email field */
 .modal-field {
   display: flex;
   flex-direction: column;
@@ -1613,7 +1513,6 @@ body {
   color: var(--text-3);
 }
 
-/* Status */
 .modal-status {
   min-height: 1.4rem;
   font-family: var(--font-mono);
@@ -1632,7 +1531,6 @@ body {
   color: var(--blood);
 }
 
-/* Modal footer */
 .modal-footer {
   display: flex;
   align-items: center;
@@ -1686,10 +1584,7 @@ body {
   transform: none;
 }
 
-/* ════════════════════════════════════════════════════════════
-      SECTION 12 — Shared Section Headers
-      Used by the severity, SHAP, and treatment panels (03–05).
-      ════════════════════════════════════════════════════════════ */
+/* SECTION 12 — Shared Section Headers */
 .section-header {
   display: flex;
   align-items: center;
@@ -1723,10 +1618,7 @@ body {
   letter-spacing: 0.04em;
 }
 
-/* ════════════════════════════════════════════════════════════
-      SECTION 13 — Risk Severity Gauge  (Feature 3)
-      Half-circle SVG gauge with animated arc + per-param bars.
-      ════════════════════════════════════════════════════════════ */
+/* SECTION 13 — Risk Severity Gauge */
 .severity-panel {
   background: var(--bg-3);
   border: 1px solid var(--border);
@@ -1760,20 +1652,19 @@ body {
 }
 .gauge-score {
   font-family: var(--font-mono);
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   color: var(--text);
   line-height: 1;
 }
 .gauge-label {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 1.2rem;
   letter-spacing: 0.06em;
   margin-top: 2px;
   text-transform: uppercase;
 }
 
-/* per-param mini bars */
 .severity-params {
   flex: 1;
   display: flex;
@@ -1789,7 +1680,7 @@ body {
 }
 .sev-param-name {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 1.2rem;
   color: var(--text-2);
   text-align: right;
 }
@@ -1807,14 +1698,11 @@ body {
 }
 .sev-param-pct {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 1rem;
   text-align: right;
 }
 
-/* ════════════════════════════════════════════════════════════
-      SECTION 14 — SHAP Explainability Chart  (Feature 8)
-      Animated horizontal bar chart; red = above normal, green = below.
-      ════════════════════════════════════════════════════════════ */
+/* SECTION 14 — SHAP Explainability Chart */
 .shap-panel {
   background: var(--bg-3);
   border: 1px solid var(--border);
@@ -1847,7 +1735,7 @@ body {
 }
 .shap-feat-name {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 1rem;
   color: var(--text-2);
   text-align: right;
   white-space: nowrap;
@@ -1866,21 +1754,18 @@ body {
 }
 .shap-pct {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 1rem;
   font-weight: 600;
   text-align: right;
 }
 .shap-dir {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 1rem;
   color: var(--text-3);
   letter-spacing: 0.03em;
 }
 
-/* ════════════════════════════════════════════════════════════
-      SECTION 15 — AI Treatment Suggestions  (Feature 1)
-      Loading spinner, summary strip, 3-column card grid, doctor alert.
-      ════════════════════════════════════════════════════════════ */
+/* SECTION 15 — AI Treatment Suggestions */
 .treatment-panel {
   background: var(--bg-3);
   border: 1px solid var(--border);
@@ -1894,7 +1779,7 @@ body {
   gap: 0.85rem;
   color: var(--text-3);
   font-family: var(--font-mono);
-  font-size: 0.82rem;
+  font-size: 1.2rem;
   padding: 1.2rem 0;
 }
 .treat-spinner {
@@ -1913,7 +1798,7 @@ body {
 }
 
 .treat-summary {
-  font-size: 0.92rem;
+  font-size: 1.2rem;
   color: var(--text-2);
   line-height: 1.65;
   padding: 0.9rem 1.1rem;
@@ -1936,7 +1821,7 @@ body {
 }
 .treat-sec-title {
   font-family: var(--font-body);
-  font-size: 0.82rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: var(--text);
   margin-bottom: 0.65rem;
@@ -1951,7 +1836,7 @@ body {
   gap: 0.4rem;
 }
 .treat-list li {
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: var(--text-2);
   line-height: 1.45;
   padding-left: 0.9rem;
@@ -1972,14 +1857,14 @@ body {
   border: 1px solid rgba(232, 71, 42, 0.2);
   border-radius: 8px;
   padding: 0.75rem 1rem;
-  font-size: 0.83rem;
+  font-size: 1rem;
   color: var(--text-2);
   margin-bottom: 0.8rem;
   line-height: 1.5;
 }
 .treat-disclaimer {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 1rem;
   color: var(--text-3);
   line-height: 1.5;
   border-top: 1px solid var(--border);
@@ -1987,7 +1872,615 @@ body {
 }
 .treat-error {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: var(--blood);
   padding: 0.75rem 0;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   SECTION — NAVBAR LINKS
+   ════════════════════════════════════════════════════════════════════ */
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  margin-left: auto;
+}
+
+.nav-link {
+  font-family: var(--font-mono);
+  font-size: 01.2rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--text);
+  background: var(--surface-hover);
+}
+
+.nav-cta {
+  color: var(--blood);
+  border: 1px solid rgba(232, 71, 42, 0.3);
+  background: rgba(232, 71, 42, 0.06);
+  margin-left: 0.6rem;
+  padding: 0.5rem 1.1rem;
+}
+
+.nav-cta:hover {
+  background: rgba(232, 71, 42, 0.14);
+  color: var(--blood);
+}
+
+@media (max-width: 700px) {
+  .nav-links {
+    display: none;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   SHARED HELPERS — used by both new sections
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Eyebrow row */
+.hb-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1.4rem;
+}
+
+.hb-line {
+  flex: 1;
+  max-width: 72px;
+  height: 1px;
+  background: var(--border-2);
+}
+
+.hb-eye-text {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--blood);
+}
+
+/* Heading */
+.hb-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.8vw, 2.9rem);
+  color: var(--blood);
+  text-align: center;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.2rem;
+}
+
+.hb-heading em {
+  color: var(--blood);
+  font-style: italic;
+}
+
+/* Body copy */
+.hb-body {
+  font-size: 1.4rem;
+  color: var(--text-2);
+  line-height: 1.85;
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 1rem;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   HOME BRIEF SECTION
+   ════════════════════════════════════════════════════════════════════ */
+
+.home-brief {
+  position: relative;
+  z-index: 10;
+  padding: 5.5rem 2rem 5rem;
+  border-top: 1px solid var(--border);
+}
+
+.hb-inner {
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+/* ── Stat ribbon ── */
+.hb-stats {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--bg-3);
+  overflow: hidden;
+  margin: 2.5rem 0 3rem;
+}
+
+.hb-stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.6rem 1.25rem;
+  gap: 0.4rem;
+  text-align: center;
+}
+
+.hb-stat + .hb-stat {
+  border-left: 1px solid var(--border);
+}
+
+.hb-stat-val {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.hb-stat-lbl {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+  color: var(--text-3);
+  line-height: 1.45;
+  max-width: 120px;
+}
+
+@media (max-width: 680px) {
+  .hb-stats {
+    flex-wrap: wrap;
+    border-radius: 14px;
+  }
+  .hb-stat {
+    flex: 1 1 45%;
+  }
+  .hb-stat:nth-child(3) {
+    border-left: none;
+    border-top: 1px solid var(--border);
+  }
+  .hb-stat:nth-child(5) {
+    border-left: none;
+    border-top: 1px solid var(--border);
+  }
+}
+
+/* ── How it works flow ── */
+.hb-flow {
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.8rem 2rem;
+}
+
+.hb-flow-label {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  text-align: center;
+  margin-bottom: 1.4rem;
+}
+
+.hb-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hb-step {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  background: var(--bg-4);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.3rem;
+  flex: 1;
+  min-width: 195px;
+  max-width: 265px;
+  transition: border-color 0.2s;
+}
+
+.hb-step:hover {
+  border-color: rgba(232, 71, 42, 0.35);
+}
+
+.hb-step-num {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--blood);
+  flex-shrink: 0;
+}
+
+.hb-step-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.2rem;
+}
+
+.hb-step-desc {
+  font-size: 1.2rem;
+  color: var(--text-3);
+  line-height: 1.45;
+}
+
+.hb-step-arrow {
+  flex-shrink: 0;
+}
+
+@media (max-width: 700px) {
+  .hb-step-arrow {
+    display: none;
+  }
+  .hb-step {
+    max-width: 100%;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   ANEMIA EDUCATION SECTION
+   ════════════════════════════════════════════════════════════════════ */
+
+.anemia-edu {
+  position: relative;
+  z-index: 10;
+  padding: 6rem 2rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.ae-inner {
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+.ae-lead {
+  margin-bottom: 3.5rem !important;
+}
+
+.ae-sub-label {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 1.1rem;
+}
+
+/* ── Anemia type cards grid ── */
+.ae-types {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+@media (max-width: 760px) {
+  .ae-types {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ae-card {
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.4rem 1.4rem 1.2rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+/* Top glow line using card accent colour */
+.ae-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: var(--card-accent, #e8472a);
+  opacity: 0.35;
+  border-radius: 0 0 4px 4px;
+}
+
+.ae-card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+.ae-card-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin-bottom: 0.85rem;
+}
+
+.ae-card-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ae-card-name {
+  font-size: 01.5rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 0.3rem;
+}
+
+.ae-card-tag {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+  padding: 0.18rem 0.55rem;
+  border-radius: 100px;
+  display: inline-block;
+}
+
+.ae-card-desc {
+  font-size: 1.5rem;
+  color: var(--text-2);
+  line-height: 1.72;
+  margin-bottom: 0.95rem;
+}
+
+/* CBC indicator pills */
+.ae-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.38rem;
+}
+
+.ae-pill {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.22rem 0.6rem;
+  border-radius: 5px;
+}
+
+.ae-pill.low {
+  background: rgba(232, 71, 42, 0.12);
+  color: #e8472a;
+}
+.ae-pill.high {
+  background: rgba(240, 180, 41, 0.12);
+  color: #f0b429;
+}
+.ae-pill.norm {
+  background: rgba(42, 219, 122, 0.1);
+  color: #2adb7a;
+}
+
+/* ── Causes & Symptoms grid ── */
+.ae-cs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+@media (max-width: 760px) {
+  .ae-cs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ae-cs-panel {
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.4rem 1.4rem;
+}
+
+.ae-cs-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.ae-cs-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ae-cs-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.ae-cs-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.ae-cs-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  font-size: 1.5rem;
+  color: var(--text-2);
+  line-height: 1.55;
+}
+
+.ae-cs-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.ae-cs-list strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Symptom chips */
+.ae-symptoms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.ae-sym-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--bg-4);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 0.32rem 0.8rem;
+  font-size: 1.5rem;
+  color: var(--text-2);
+  transition: border-color 0.2s, color 0.2s;
+  cursor: default;
+}
+
+.ae-sym-chip:hover {
+  border-color: rgba(232, 71, 42, 0.38);
+  color: var(--text);
+}
+
+.ae-sym-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--blood);
+  opacity: 0.65;
+  flex-shrink: 0;
+}
+
+/* ── CTA strip ── */
+.ae-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: linear-gradient(
+    120deg,
+    rgba(232, 71, 42, 0.09),
+    rgba(232, 71, 42, 0.04)
+  );
+  border: 1px solid rgba(232, 71, 42, 0.22);
+  border-radius: 16px;
+  padding: 1.9rem 2.25rem;
+  margin-bottom: 4rem;
+}
+
+.ae-cta-heading {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--blood);
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.01em;
+}
+
+.ae-cta-sub {
+  font-size: 1.2rem;
+  color: var(--text-2);
+  line-height: 1.65;
+  max-width: 480px;
+}
+
+.ae-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: var(--blood);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.85rem 1.7rem;
+  border-radius: 10px;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.ae-cta-btn:hover {
+  background: var(--blood-dim);
+  transform: translateY(-1px);
+}
+
+/* ── Footer ── */
+.ae-footer {
+  text-align: center;
+  padding: 2.5rem 1rem 3rem;
+  border-top: 1px solid var(--border);
+}
+
+.ae-footer-brand {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--text);
+  margin-bottom: 0.55rem;
+  letter-spacing: -0.01em;
+}
+
+.ae-footer-note {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--text-3);
+  letter-spacing: 0.025em;
+  margin-bottom: 0.4rem;
+}
+
+.ae-footer-copy {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--text-3);
+  opacity: 0.5;
+}
+
+/* hb-step-info and ae-cta-copy — wrapper divs, inherit from children */
+.hb-step-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.ae-cta-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }

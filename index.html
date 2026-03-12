@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HemoScan AI — Anemia Prediction System</title>
 
-    <!-- ── Google Fonts ───────────────────────────────────────────── -->
+    <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -14,10 +14,7 @@
   </head>
 
   <body>
-    <!-- ════════════════════════════════════════════════════════════
-         BACKGROUND — Animated mesh gradient orbs + noise overlay
-         Decorative only; aria-hidden so screen readers skip it.
-    ════════════════════════════════════════════════════════════════ -->
+    <!-- BACKGROUND -->
     <div class="bg-mesh" aria-hidden="true">
       <div class="mesh-orb orb-1"></div>
       <div class="mesh-orb orb-2"></div>
@@ -25,12 +22,9 @@
     </div>
     <div class="noise-overlay" aria-hidden="true"></div>
 
-    <!-- ════════════════════════════════════════════════════════════
-         NAVIGATION BAR — Brand logo + name
-    ════════════════════════════════════════════════════════════════ -->
+    <!-- NAVIGATION BAR -->
     <nav class="navbar">
       <div class="nav-brand">
-        <!-- Blood-cell SVG icon -->
         <div class="brand-icon">
           <svg
             width="30"
@@ -60,11 +54,15 @@
           >HemoScan<span class="brand-ai"> AI</span></span
         >
       </div>
+      <nav class="nav-links" aria-label="Site navigation">
+        <a href="#home-brief" class="nav-link">About</a>
+        <a href="#predict" class="nav-link">Diagnose</a>
+        <a href="#anemia-edu" class="nav-link">Learn</a>
+        <a href="#predict" class="nav-link nav-cta">Try Now →</a>
+      </nav>
     </nav>
 
-    <!-- ════════════════════════════════════════════════════════════
-         HERO SECTION — Headline, subtitle, animated blood-cell visual
-    ════════════════════════════════════════════════════════════════ -->
+    <!-- HERO SECTION -->
     <section class="hero">
       <div class="hero-content">
         <div class="hero-badge">CBC-Based Anemia Detection</div>
@@ -76,7 +74,6 @@
         </p>
       </div>
 
-      <!-- Animated blood-cell ring visual (decorative) -->
       <div class="hero-visual" aria-hidden="true">
         <div class="blood-cell-animation">
           <div class="cell cell-1"></div>
@@ -112,14 +109,137 @@
       </div>
     </section>
 
-    <!-- ════════════════════════════════════════════════════════════
-         SECTION 01 — CBC PARAMETERS FORM
-         Manual entry of hemoglobin, MCV, MCH, MCHC values with
-         sliders and real-time normal-range status indicators.
-    ════════════════════════════════════════════════════════════════ -->
+    <!-- ═══════════════════════════════════════════════════════════
+         HOME BRIEF — What is Anemia?
+         Appears between hero and the CBC form.
+    ═══════════════════════════════════════════════════════════════ -->
+    <section class="home-brief" id="home-brief">
+      <div class="hb-inner">
+        <!-- Eyebrow label -->
+        <div class="hb-eyebrow">
+          <span class="hb-line"></span>
+          <span class="hb-eye-text">What is Anemia?</span>
+          <span class="hb-line"></span>
+        </div>
+
+        <!-- Headline + body -->
+        <h2 class="hb-heading">
+          A silent condition affecting<br />
+          <em>1 in 3 people</em> worldwide
+        </h2>
+        <p class="hb-body">
+          Anemia happens when your body doesn't have enough healthy red blood
+          cells to carry oxygen to your organs. It is the world's most prevalent
+          nutritional disorder — yet most cases go undetected because symptoms
+          like fatigue and breathlessness are easily dismissed as stress or poor
+          sleep.
+        </p>
+        <p class="hb-body">
+          A simple Complete Blood Count (CBC) test is all it takes to detect it.
+          HemoScan AI reads those four numbers — Hemoglobin, MCV, MCH and MCHC —
+          and returns an instant AI-powered prediction, severity score, and
+          personalised treatment plan.
+        </p>
+
+        <!-- Stat ribbon -->
+        <div class="hb-stats">
+          <div class="hb-stat">
+            <span class="hb-stat-val" style="color: #e8472a">1.6 B+</span>
+            <span class="hb-stat-lbl">people affected globally</span>
+          </div>
+          <div class="hb-divider"></div>
+          <div class="hb-stat">
+            <span class="hb-stat-val" style="color: #f0b429">42 %</span>
+            <span class="hb-stat-lbl">of children under 5 are anemic</span>
+          </div>
+          <div class="hb-divider"></div>
+          <div class="hb-stat">
+            <span class="hb-stat-val" style="color: #2adb7a">95 %</span>
+            <span class="hb-stat-lbl"
+              >of cases are preventable / treatable</span
+            >
+          </div>
+          <div class="hb-divider"></div>
+          <div class="hb-stat">
+            <span class="hb-stat-val" style="color: #4a9eff">4</span>
+            <span class="hb-stat-lbl">CBC values is all we need</span>
+          </div>
+        </div>
+
+        <!-- How it works mini-steps -->
+        <div class="hb-flow">
+          <div class="hb-flow-label">How HemoScan AI works</div>
+          <div class="hb-steps">
+            <div class="hb-step">
+              <div class="hb-step-num">01</div>
+              <div class="hb-step-info">
+                <div class="hb-step-title">Enter or Upload</div>
+                <div class="hb-step-desc">
+                  Type CBC values or drag your lab PDF / image
+                </div>
+              </div>
+            </div>
+            <div class="hb-step-arrow">
+              <svg
+                width="24"
+                height="10"
+                viewBox="0 0 24 10"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M0 5H22M18 1L22 5L18 9"
+                  stroke="rgba(255,255,255,0.18)"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <div class="hb-step">
+              <div class="hb-step-num">02</div>
+              <div class="hb-step-info">
+                <div class="hb-step-title">AI Analyses</div>
+                <div class="hb-step-desc">
+                  RandomForest model trained on 65 k patient records
+                </div>
+              </div>
+            </div>
+            <div class="hb-step-arrow">
+              <svg
+                width="24"
+                height="10"
+                viewBox="0 0 24 10"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M0 5H22M18 1L22 5L18 9"
+                  stroke="rgba(255,255,255,0.18)"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <div class="hb-step">
+              <div class="hb-step-num">03</div>
+              <div class="hb-step-info">
+                <div class="hb-step-title">Get Your Report</div>
+                <div class="hb-step-desc">
+                  Prediction · severity score · AI treatment plan · printable
+                  PDF
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 01 — CBC PARAMETERS FORM -->
     <section class="form-section" id="predict">
       <div class="form-container">
-        <!-- ── Panel 01: CBC parameter inputs ──────────────────── -->
         <div class="panel cbc-panel">
           <div class="panel-header">
             <span class="panel-number">01</span>
@@ -129,7 +249,6 @@
 
           <div class="panel-body">
             <div class="cbc-grid">
-              <!-- Hemoglobin -->
               <div class="param-card">
                 <div class="param-header">
                   <div class="param-icon hgb-icon">Hgb</div>
@@ -167,7 +286,6 @@
                 <div class="param-status" id="status-hgb"></div>
               </div>
 
-              <!-- MCV -->
               <div class="param-card">
                 <div class="param-header">
                   <div class="param-icon mcv-icon">MCV</div>
@@ -205,7 +323,6 @@
                 <div class="param-status" id="status-mcv"></div>
               </div>
 
-              <!-- MCH -->
               <div class="param-card">
                 <div class="param-header">
                   <div class="param-icon mch-icon">MCH</div>
@@ -243,7 +360,6 @@
                 <div class="param-status" id="status-mch"></div>
               </div>
 
-              <!-- MCHC -->
               <div class="param-card">
                 <div class="param-header">
                   <div class="param-icon mchc-icon">MCHC</div>
@@ -283,7 +399,6 @@
                 <div class="param-status" id="status-mchc"></div>
               </div>
 
-              <!-- Biological Sex toggle (full-width card) -->
               <div class="param-card gender-card">
                 <div class="param-header">
                   <div class="param-icon gender-icon">Sex</div>
@@ -309,13 +424,10 @@
                 </div>
               </div>
             </div>
-            <!-- /.cbc-grid -->
           </div>
-          <!-- /.panel-body -->
         </div>
-        <!-- /.cbc-panel -->
 
-        <!-- ── Panel AI: Auto-extract CBC values from uploaded report ── -->
+        <!--  Panel AI: Auto-extract CBC values from uploaded report -->
         <div class="panel upload-panel">
           <div class="panel-header">
             <span class="panel-number">AI</span>
@@ -323,7 +435,6 @@
             <span class="panel-badge">PDF or image</span>
           </div>
           <div class="panel-body">
-            <!-- Drag-and-drop / click-to-browse upload zone -->
             <div
               class="upload-zone"
               id="uploadZone"
@@ -405,9 +516,7 @@
             <div class="extract-status" id="extractStatus" role="status"></div>
           </div>
         </div>
-        <!-- /.upload-panel -->
 
-        <!-- ── Form action buttons ──────────────────────────────── -->
         <div class="action-bar">
           <button class="btn-reset" onclick="resetForm()">
             <svg
@@ -453,18 +562,11 @@
           </button>
         </div>
       </div>
-      <!-- /.form-container -->
     </section>
-    <!-- /#predict -->
 
-    <!-- ════════════════════════════════════════════════════════════
-         SECTION 02 — PREDICTION RESULTS
-         Hidden by default. Shown by displayResults() after a
-         successful /predict response.
-    ════════════════════════════════════════════════════════════════ -->
+    <!-- SECTION 02 — PREDICTION RESULTS -->
     <section class="results-section" id="results" style="display: none">
       <div class="results-container">
-        <!-- Results header row -->
         <div class="results-header">
           <span class="panel-number">02</span>
           <h2 class="panel-title">Prediction Results</h2>
@@ -474,7 +576,6 @@
         </div>
 
         <div class="results-body">
-          <!-- ── Verdict card: prediction + confidence ──────────── -->
           <div class="verdict-card" id="verdictCard">
             <div class="verdict-icon-wrap" id="verdictIconWrap">
               <span id="verdictIcon"></span>
@@ -483,7 +584,6 @@
               <div class="verdict-label">Prediction Result</div>
               <div class="verdict-title" id="verdictTitle"></div>
               <div class="verdict-subtitle" id="verdictSubtitle"></div>
-              <!-- Model badge injected here by JS -->
             </div>
             <div class="verdict-confidence">
               <div class="conf-label">Confidence</div>
@@ -494,21 +594,17 @@
             </div>
           </div>
 
-          <!-- ── Parameter summary cards (Hgb, MCV, MCH, MCHC, Sex) ── -->
           <div class="param-summary">
             <h3 class="summary-title">Parameter Analysis</h3>
             <div class="summary-grid" id="summaryGrid"></div>
           </div>
 
-          <!-- ── Feature 3: Risk Severity Score ────────────────── -->
-          <!-- Gauge SVG is animated by renderSeverityGauge() in JS -->
           <div class="severity-panel" id="severityPanel">
             <div class="section-header">
               <span class="section-tag">03</span>
               <h3 class="section-title">Risk Severity Score</h3>
             </div>
             <div class="severity-body">
-              <!-- Half-circle SVG gauge -->
               <div class="gauge-wrap">
                 <svg
                   class="gauge-svg"
@@ -517,7 +613,6 @@
                   xmlns="http://www.w3.org/2000/svg"
                   aria-hidden="true"
                 >
-                  <!-- Background track -->
                   <path
                     d="M20,100 A80,80 0 0,1 180,100"
                     stroke="rgba(255,255,255,0.07)"
@@ -525,7 +620,6 @@
                     fill="none"
                     stroke-linecap="round"
                   />
-                  <!-- Animated fill arc (JS sets stroke-dashoffset) -->
                   <path
                     id="gaugeFill"
                     d="M20,100 A80,80 0 0,1 180,100"
@@ -541,7 +635,6 @@
                         stroke 0.4s;
                     "
                   />
-                  <!-- Animated needle (JS sets transform:rotate) -->
                   <line
                     id="gaugeNeedle"
                     x1="100"
@@ -562,7 +655,6 @@
                     r="5"
                     fill="rgba(255,255,255,0.3)"
                   />
-                  <!-- Scale labels -->
                   <text
                     x="18"
                     y="118"
@@ -582,19 +674,15 @@
                     100
                   </text>
                 </svg>
-                <!-- Score number + level label (JS-populated) -->
                 <div class="gauge-center">
                   <div class="gauge-score" id="gaugeScore">0</div>
                   <div class="gauge-label" id="gaugeLabel">—</div>
                 </div>
               </div>
-              <!-- Per-parameter deviation mini-bars (JS-populated) -->
               <div class="severity-params" id="severityParams"></div>
             </div>
           </div>
 
-          <!-- ── Feature 8: SHAP-style Prediction Explainability ── -->
-          <!-- Bar chart rows injected by renderShapChart() in JS -->
           <div class="shap-panel" id="shapPanel">
             <div class="section-header">
               <span class="section-tag">04</span>
@@ -609,20 +697,18 @@
             ></div>
           </div>
 
-          <!-- ── Feature 1: AI Treatment Suggestions ───────────── -->
-          <!-- Content injected by fetchTreatmentSuggestions() in JS -->
           <div class="treatment-panel" id="treatmentPanel">
             <div class="section-header">
               <span class="section-tag">05</span>
               <h3 class="section-title">AI Treatment Suggestions</h3>
               <span class="section-sub">Powered by Groq Llama 3</span>
             </div>
-            <!-- Loading spinner shown while Groq request is in flight -->
+
             <div class="treatment-loading" id="treatmentLoading">
               <div class="treat-spinner" aria-hidden="true"></div>
               <span>Generating personalised recommendations…</span>
             </div>
-            <!-- Treatment content hidden until loaded -->
+
             <div
               class="treatment-body"
               id="treatmentBody"
@@ -630,7 +716,6 @@
             ></div>
           </div>
 
-          <!-- ── Clinical Disclaimer ───────────────────────────── -->
           <div class="clinical-note">
             <div class="note-icon" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
@@ -657,13 +742,7 @@
             </p>
           </div>
 
-          <!-- ── Report Action Buttons ─────────────────────────── -->
-          <!-- Two options:
-               1. Send by Email  — requires Brevo API key, sends to any address
-               2. Export / Print — no email needed, opens print dialog in new tab
-                                   ideal for rural or offline use              -->
           <div class="report-actions">
-            <!-- Send report by email (via Brevo) -->
             <button class="btn-report btn-email" onclick="openEmailModal()">
               <svg
                 width="17"
@@ -683,7 +762,6 @@
               Send Report by Email
             </button>
 
-            <!-- Export / print report (no email needed) -->
             <button
               class="btn-report btn-export"
               id="btnExportReport"
@@ -713,18 +791,432 @@
               Export / Print Report
             </button>
           </div>
-          <!-- /.report-actions -->
         </div>
-        <!-- /.results-body -->
       </div>
-      <!-- /.results-container -->
     </section>
-    <!-- /#results -->
 
-    <!-- ════════════════════════════════════════════════════════════
-         LOADING OVERLAY — Shown during /predict request flight
-         Three animated steps give visual feedback on progress.
-    ════════════════════════════════════════════════════════════════ -->
+    <!-- ═══════════════════════════════════════════════════════════
+         ANEMIA EDUCATION — Types · Causes · Symptoms
+         Placed before the footer (before loading overlay).
+    ═══════════════════════════════════════════════════════════════ -->
+    <section class="anemia-edu" id="anemia-edu">
+      <div class="ae-inner">
+        <!-- Section header -->
+        <div class="hb-eyebrow">
+          <span class="hb-line"></span>
+          <span class="hb-eye-text">Understanding Anemia</span>
+          <span class="hb-line"></span>
+        </div>
+        <h2 class="hb-heading" style="margin-bottom: 0.6rem">
+          Types, Causes &amp; Symptoms
+        </h2>
+        <p class="hb-body ae-lead">
+          Anemia is not one disease — it is a final common pathway of many
+          different conditions. Knowing the type determines the treatment.
+        </p>
+
+        <!-- ── Types of Anemia ───────────────────────────────── -->
+        <div class="ae-sub-label">Types of Anemia</div>
+        <div class="ae-types">
+          <article class="ae-card" style="--card-accent: #e8472a">
+            <header class="ae-card-head">
+              <div
+                class="ae-card-icon"
+                style="
+                  border-color: rgba(232, 71, 42, 0.3);
+                  background: rgba(232, 71, 42, 0.08);
+                "
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M12 3C12 3 5 8 5 14C5 18.4 8.1 22 12 22C15.9 22 19 18.4 19 14C19 8 12 3 12 3Z"
+                    stroke="#e8472a"
+                    stroke-width="1.6"
+                    fill="rgba(232,71,42,.12)"
+                  />
+                  <ellipse
+                    cx="12"
+                    cy="15"
+                    rx="2.5"
+                    ry="1.8"
+                    fill="#e8472a"
+                    opacity=".6"
+                  />
+                </svg>
+              </div>
+              <div>
+                <div class="ae-card-name">Iron-Deficiency Anemia</div>
+                <div
+                  class="ae-card-tag"
+                  style="color: #e8472a; background: rgba(232, 71, 42, 0.1)"
+                >
+                  Most Common · ~50% of cases
+                </div>
+              </div>
+            </header>
+            <p class="ae-card-desc">
+              Low iron means fewer, smaller red cells. Caused by poor diet,
+              blood loss (menstruation, GI bleed) or poor absorption. The
+              hallmark CBC pattern is low Hgb with low MCV and MCH.
+            </p>
+            <div class="ae-pills">
+              <span class="ae-pill low">↓ Hgb</span>
+              <span class="ae-pill low">↓ MCV &lt;80 fL</span>
+              <span class="ae-pill low">↓ MCH &lt;27 pg</span>
+            </div>
+          </article>
+
+          <article class="ae-card" style="--card-accent: #f0b429">
+            <header class="ae-card-head">
+              <div
+                class="ae-card-icon"
+                style="
+                  border-color: rgba(240, 180, 41, 0.3);
+                  background: rgba(240, 180, 41, 0.08);
+                "
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="9"
+                    stroke="#f0b429"
+                    stroke-width="1.6"
+                  />
+                  <circle cx="12" cy="12" r="5" fill="#f0b429" opacity=".25" />
+                  <circle cx="12" cy="12" r="2" fill="#f0b429" opacity=".8" />
+                </svg>
+              </div>
+              <div>
+                <div class="ae-card-name">Vitamin B12 / Folate Deficiency</div>
+                <div
+                  class="ae-card-tag"
+                  style="color: #f0b429; background: rgba(240, 180, 41, 0.1)"
+                >
+                  Macrocytic · Megaloblastic
+                </div>
+              </div>
+            </header>
+            <p class="ae-card-desc">
+              Impaired DNA synthesis produces oversized, immature red cells.
+              Common in strict vegetarians, elderly patients, and those with
+              malabsorption (Crohn's, celiac disease).
+            </p>
+            <div class="ae-pills">
+              <span class="ae-pill low">↓ Hgb</span>
+              <span class="ae-pill high">↑ MCV &gt;100 fL</span>
+              <span class="ae-pill norm">Normal MCHC</span>
+            </div>
+          </article>
+
+          <article class="ae-card" style="--card-accent: #4a9eff">
+            <header class="ae-card-head">
+              <div
+                class="ae-card-icon"
+                style="
+                  border-color: rgba(74, 158, 255, 0.3);
+                  background: rgba(74, 158, 255, 0.08);
+                "
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M12 3L14.8 9H21L15.6 12.8L17.8 19L12 15.2L6.2 19L8.4 12.8L3 9H9.2L12 3Z"
+                    stroke="#4a9eff"
+                    stroke-width="1.5"
+                    fill="rgba(74,158,255,.12)"
+                  />
+                </svg>
+              </div>
+              <div>
+                <div class="ae-card-name">Anemia of Chronic Disease</div>
+                <div
+                  class="ae-card-tag"
+                  style="color: #4a9eff; background: rgba(74, 158, 255, 0.1)"
+                >
+                  Normocytic · Inflammatory
+                </div>
+              </div>
+            </header>
+            <p class="ae-card-desc">
+              Chronic illness (kidney disease, cancer, rheumatoid arthritis)
+              triggers inflammation that suppresses red cell production. Cell
+              size is normal but total count is reduced.
+            </p>
+            <div class="ae-pills">
+              <span class="ae-pill low">↓ Hgb</span>
+              <span class="ae-pill norm">Normal MCV</span>
+              <span class="ae-pill norm">Normal MCH</span>
+            </div>
+          </article>
+
+          <article class="ae-card" style="--card-accent: #c07ef0">
+            <header class="ae-card-head">
+              <div
+                class="ae-card-icon"
+                style="
+                  border-color: rgba(192, 126, 240, 0.3);
+                  background: rgba(192, 126, 240, 0.08);
+                "
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+                    stroke="#c07ef0"
+                    stroke-width="1.5"
+                    fill="rgba(192,126,240,.1)"
+                  />
+                </svg>
+              </div>
+              <div>
+                <div class="ae-card-name">Hemolytic Anemia</div>
+                <div
+                  class="ae-card-tag"
+                  style="color: #c07ef0; background: rgba(192, 126, 240, 0.1)"
+                >
+                  Destruction-based · Variable
+                </div>
+              </div>
+            </header>
+            <p class="ae-card-desc">
+              Red blood cells are destroyed faster than they are replaced. Can
+              be inherited (sickle cell, thalassemia) or acquired (autoimmune,
+              drug-induced, infection).
+            </p>
+            <div class="ae-pills">
+              <span class="ae-pill low">↓ Hgb</span>
+              <span class="ae-pill high">↑ Reticulocytes</span>
+              <span class="ae-pill high">↑ Bilirubin</span>
+            </div>
+          </article>
+        </div>
+        <!-- /.ae-types -->
+
+        <!-- ── Causes & Symptoms ─────────────────────────────── -->
+        <div class="ae-cs-grid">
+          <!-- Causes panel -->
+          <div class="ae-cs-panel">
+            <div class="ae-cs-header">
+              <div
+                class="ae-cs-icon"
+                style="
+                  border-color: rgba(232, 71, 42, 0.25);
+                  background: rgba(232, 71, 42, 0.08);
+                "
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="#e8472a"
+                    stroke-width="1.7"
+                  />
+                  <path
+                    d="M12 8V13M12 16V17"
+                    stroke="#e8472a"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </div>
+              <h3 class="ae-cs-title">Common Causes</h3>
+            </div>
+            <ul class="ae-cs-list">
+              <li>
+                <span class="ae-cs-dot" style="background: #e8472a"></span
+                ><span
+                  ><strong>Poor diet</strong> — insufficient iron, B12, or
+                  folate</span
+                >
+              </li>
+              <li>
+                <span class="ae-cs-dot" style="background: #e8a12a"></span
+                ><span
+                  ><strong>Blood loss</strong> — heavy periods, GI bleeding,
+                  surgery</span
+                >
+              </li>
+              <li>
+                <span class="ae-cs-dot" style="background: #f0b429"></span
+                ><span
+                  ><strong>Chronic illness</strong> — kidney disease, cancer,
+                  HIV</span
+                >
+              </li>
+              <li>
+                <span class="ae-cs-dot" style="background: #4a9eff"></span
+                ><span
+                  ><strong>Genetic conditions</strong> — sickle cell,
+                  thalassemia</span
+                >
+              </li>
+              <li>
+                <span class="ae-cs-dot" style="background: #2adb7a"></span
+                ><span
+                  ><strong>Bone marrow failure</strong> — aplastic anemia,
+                  leukemia</span
+                >
+              </li>
+              <li>
+                <span class="ae-cs-dot" style="background: #c07ef0"></span
+                ><span
+                  ><strong>Pregnancy</strong> — increased demand,
+                  haemodilution</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Symptoms panel -->
+          <div class="ae-cs-panel">
+            <div class="ae-cs-header">
+              <div
+                class="ae-cs-icon"
+                style="
+                  border-color: rgba(42, 219, 122, 0.25);
+                  background: rgba(42, 219, 122, 0.08);
+                "
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="#2adb7a"
+                    stroke-width="1.7"
+                  />
+                  <path
+                    d="M8 12L11 15L16 9"
+                    stroke="#2adb7a"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+              <h3 class="ae-cs-title">Signs &amp; Symptoms</h3>
+            </div>
+            <div class="ae-symptoms">
+              <div class="ae-sym-chip">
+                <span class="ae-sym-dot"></span>Fatigue &amp; weakness
+              </div>
+              <div class="ae-sym-chip">
+                <span class="ae-sym-dot"></span>Pale or yellow skin
+              </div>
+              <div class="ae-sym-chip">
+                <span class="ae-sym-dot"></span>Shortness of breath
+              </div>
+              <div class="ae-sym-chip">
+                <span class="ae-sym-dot"></span>Dizziness
+              </div>
+              <div class="ae-sym-chip">
+                <span class="ae-sym-dot"></span>Rapid heartbeat
+              </div>
+              <div class="ae-sym-chip">
+                <span class="ae-sym-dot"></span>Cold hands &amp; feet
+              </div>
+              <div class="ae-sym-chip">
+                <span class="ae-sym-dot"></span>Persistent headaches
+              </div>
+              <div class="ae-sym-chip">
+                <span class="ae-sym-dot"></span>Chest pain
+              </div>
+              <div class="ae-sym-chip">
+                <span class="ae-sym-dot"></span>Brittle or spoon nails
+              </div>
+              <div class="ae-sym-chip">
+                <span class="ae-sym-dot"></span>Difficulty concentrating
+              </div>
+              <div class="ae-sym-chip">
+                <span class="ae-sym-dot"></span>Craving ice or clay
+              </div>
+              <div class="ae-sym-chip">
+                <span class="ae-sym-dot"></span>Sore / inflamed tongue
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.ae-cs-grid -->
+
+        <!-- ── CTA + Footer ──────────────────────────────────── -->
+        <div class="ae-cta">
+          <div class="ae-cta-copy">
+            <div class="ae-cta-heading">Think you might have anemia?</div>
+            <div class="ae-cta-sub">
+              Enter your CBC values above for a free instant analysis.
+            </div>
+          </div>
+          <a href="#predict" class="ae-cta-btn">
+            Run Free Analysis
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 18 18"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 9L15 9M10 4L15 9L10 14"
+                stroke="currentColor"
+                stroke-width="1.9"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+        </div>
+
+        <footer class="ae-footer">
+          <div class="ae-footer-brand">
+            HemoScan<span style="color: #e8472a; font-style: italic"> AI</span>
+          </div>
+          <div class="ae-footer-note">
+            For clinical decision support only — not a substitute for
+            professional medical advice.
+          </div>
+          <div class="ae-footer-copy">
+            © 2025 HemoScan AI · Built for early anemia detection
+          </div>
+        </footer>
+      </div>
+    </section>
+
     <div class="loading-overlay" id="loadingOverlay" aria-live="polite">
       <div class="loading-card">
         <div class="loading-animation" aria-hidden="true">
@@ -751,11 +1243,7 @@
       </div>
     </div>
 
-    <!-- ════════════════════════════════════════════════════════════
-         EMAIL MODAL — Collect recipient address and send report
-         Triggered by "Send Report by Email" button in results.
-         Backdrop click or Escape key closes the modal.
-    ════════════════════════════════════════════════════════════════ -->
+    <!-- EMAIL MODAL -->
     <div
       class="modal-overlay"
       id="emailModal"
@@ -765,7 +1253,6 @@
       aria-labelledby="modalTitle"
     >
       <div class="modal">
-        <!-- Modal header -->
         <div class="modal-header">
           <div class="modal-header-left">
             <div class="modal-icon" aria-hidden="true">
@@ -797,15 +1284,12 @@
           </button>
         </div>
 
-        <!-- Modal body -->
         <div class="modal-body">
-          <!-- Prediction preview strip -->
           <div class="modal-preview" id="modalPreview">
             <div class="preview-verdict" id="previewVerdict"></div>
             <div class="preview-confidence" id="previewConfidence"></div>
           </div>
 
-          <!-- Recipient email address input -->
           <div class="modal-field">
             <label class="modal-label" for="emailInput">
               Recipient email address
@@ -845,12 +1329,9 @@
             </div>
           </div>
 
-          <!-- Status / error message -->
           <div class="modal-status" id="modalStatus" role="status"></div>
         </div>
-        <!-- /.modal-body -->
 
-        <!-- Modal footer actions -->
         <div class="modal-footer">
           <button class="btn-modal-cancel" onclick="closeEmailModal()">
             Cancel
@@ -879,13 +1360,7 @@
           </button>
         </div>
       </div>
-      <!-- /.modal -->
     </div>
-    <!-- /.modal-overlay -->
-
-    <!-- ════════════════════════════════════════════════════════════
-         APPLICATION SCRIPT
-    ════════════════════════════════════════════════════════════════ -->
     <script src="script.js"></script>
   </body>
 </html>
